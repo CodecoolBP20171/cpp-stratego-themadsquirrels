@@ -6,6 +6,7 @@ SDLTest::~SDLTest()
 {
     if(renderer) SDL_DestroyRenderer(renderer);
     if(window) SDL_DestroyWindow(window);
+    IMG_Quit();
     SDL_Quit();
 }
 
@@ -21,7 +22,7 @@ bool SDLTest::init()
     return true;
 }
 
-SDL_Texture* SDLTest::loadTexture(const std::string& filename)
+Texture SDLTest::loadTexture(const std::string& filename)
 {
     SDL_Texture* imgTexture = IMG_LoadTexture_RW(renderer,
                                                  SDL_RWFromFile(filename.c_str(), "rb"),
@@ -29,11 +30,12 @@ SDL_Texture* SDLTest::loadTexture(const std::string& filename)
     if(nullptr == imgTexture){
         printf( "File not found: %s SDL_image Error: %s\n", filename.c_str(), IMG_GetError() );
     }
-    return imgTexture;
+
+    return Texture(imgTexture);
 }
 
 // you won't need this load function because SDL_Image is much more advanced
-SDL_Texture* SDLTest::loadBMP(const std::string& filename)
+Texture SDLTest::loadBMP(const std::string& filename)
 {
     // first load an SDL_Surface
     SDL_Surface *bmp = SDL_LoadBMP(filename.c_str());
@@ -47,7 +49,8 @@ SDL_Texture* SDLTest::loadBMP(const std::string& filename)
     if (tex == nullptr){
         std::cout << "SDL_CreateTextureFromSurface Error: " << SDL_GetError() << std::endl;
     }
-    return tex;
+
+    return Texture(tex);
 }
 
 void SDLTest::getWindowSize(int& width, int& height)

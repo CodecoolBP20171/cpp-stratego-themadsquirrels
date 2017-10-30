@@ -60,10 +60,9 @@ void updatePosition(const int windowWidth, const int windowHeight, SDL_Rect& r)
 int main(int, char**){
     SDLTest test;
     test.init();
-
     // load pictures
-    SDL_Texture* pic00 = test.loadBMP("../pic/test1.bmp");
-    SDL_Texture* pic01 = test.loadTexture("../pic/test1.png");
+    Texture pic00 = test.loadBMP("../pic/test1.bmp");
+    Texture pic01 = test.loadTexture("../pic/test1.png");
 
     // get window sizes for te loop
     int windowWidth;
@@ -91,9 +90,8 @@ int main(int, char**){
         //First clear the renderer
         SDL_RenderClear(test.getRenderer());
 
-        //Draw the textures
-        SDL_RenderCopy(test.getRenderer(), pic00, NULL, NULL);
-        SDL_RenderCopy(test.getRenderer(), pic01, NULL, &r);
+        pic00.render(test.getRenderer(), nullptr);
+        pic01.render(test.getRenderer(), &r);
 
         //Update the screen
         SDL_RenderPresent(test.getRenderer());
@@ -106,11 +104,5 @@ int main(int, char**){
         }
     }
 
-    // let SDL destroy the textures
-    SDL_DestroyTexture(pic00);
-    SDL_DestroyTexture(pic01);
-    
-    // the other destroys (window, renderer, SDL_Quit() are called from the SDLTest destructor
-    
     return 0;
 }
