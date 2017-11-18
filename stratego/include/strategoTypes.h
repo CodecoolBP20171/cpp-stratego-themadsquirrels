@@ -5,9 +5,14 @@
 #include <Texture.h>
 
 namespace stratego {
+    // TODO: remove
+    class Player;
+    class PieceContainer;
+    class Resources;
+    // TODO: end remove
+
     using TextureSPtr = std::shared_ptr<Texture>;
     using RendererSPtr = std::shared_ptr<SDL_Renderer>;
-    class Player; // TODO: remove
     using PlayerSPtr = std::shared_ptr<Player>;
 
     enum class GameState {
@@ -21,9 +26,8 @@ namespace stratego {
         RESET
     };
 
-    enum class PieceType : char {
-        FLAG = 'f',
-        BOMB = 'b',
+    enum class PieceType {
+        FLAG = 0,
         SPY = 1,
         SCOUT = 2,
         MINER = 3,
@@ -34,7 +38,9 @@ namespace stratego {
         COLONEL = 8,
         GENERAL = 9,
         MARSHALL = 10,
-        WATER = 'w'
+        BOMB = 11,
+        WATER = 50,
+        EMPTY = 100
     };
 }
 
