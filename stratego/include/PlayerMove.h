@@ -13,7 +13,7 @@ using sptr = std::shared_ptr;
 namespace stratego {
     class PlayerMove {
     public:
-        PlayerMove(PlayerSPtr player, SelectionSPtr first, SelectionSPtr second) :
+        PlayerMove(sptr<Player> player, sptr<Selection> first, sptr<Selection> second) :
                 player(player),
                 firstSelection(first),
                 secondSelection(second) {}
@@ -21,9 +21,9 @@ namespace stratego {
         void execute();
 
     private:
-        std::weak_ptr<Player> player;
-        std::shared_ptr<Selection> firstSelection;
-        std::shared_ptr<Selection> secondSelection;
+        wptr<Player> player;
+        sptr<Selection> firstSelection;
+        sptr<Selection> secondSelection;
 
         void drawMove();
 

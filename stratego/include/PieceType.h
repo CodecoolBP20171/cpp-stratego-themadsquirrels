@@ -6,7 +6,7 @@
 #define STRATEGO_PIECETYPES_H
 
 namespace stratego {
-    enum class PieceTypes {
+    enum class PieceType {
         FLAG,
         SPY,
         SCOUT,

@@ -3,11 +3,13 @@
 
 #include <Renderable.h>
 #include <strategoTypes.h>
+#include "PieceType.h"
+#include "GameState.h"
 
 namespace stratego {
     class Piece : public Renderable {
     public:
-        explicit Piece(PieceType type, PlayerSPtr& player, Resources& resources);
+        explicit Piece(PieceType type, sptr<Player>& player, Resources& resources);
         PieceContainer& getPlayerContainer();
         void render(GameState gs) override;
     private:

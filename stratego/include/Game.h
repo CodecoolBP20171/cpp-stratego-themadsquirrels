@@ -14,24 +14,24 @@ namespace stratego {
     public:
         Game();
 
-        void loadResources();
         GameState run();
-        void playerTurn();
-        void reset();
 
     private:
         GameState gameState;
-        PlayerSPtr player1;
-        PlayerSPtr player2;
-        PlayerSPtr currentPlayer;
-        std::shared_ptr<Board> board;
-        std::vector<RenderableSPtr> renderObjects;
-        std::vector<ClickableSPtr> clickObjects;
-        SelectionSPtr selection1;
-        SelectionSPtr selection2;
+        sptr<Player> player1;
+        sptr<Player> player2;
+        sptr<Player> currentPlayer;
+        sptr<Board> board;
+        std::vector<sptr<Renderable>> renderObjects;
+        std::vector<sptr<Clickable>> clickObjects;
+        sptr<Selection> selection1;
+        sptr<Selection> selection2;
 
-        void playerSetup();
         void checkForWin();
+        void loadResources();
+        void playerSetup();
+        void playerTurn();
+        void reset();
     };
 }
 
