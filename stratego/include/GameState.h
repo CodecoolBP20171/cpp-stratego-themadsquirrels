@@ -5,13 +5,15 @@
 #ifndef STRATEGO_GAMESTATE_H
 #define STRATEGO_GAMESTATE_H
 
-enum class GameState {
-    PLAYER_SETUP,
-    PLAYER_TURN,
-    PLAYER_WIN,
-    SWITCHING,
-    RESET,
-    EXIT
-};
+namespace stratego {
+    enum class GameState {
+        PLAYER_SETUP,
+        PLAYER_TURN,
+        PLAYER_WIN,
+        SWITCHING,
+        RESET,
+        EXIT
+    };
+}
 
 #endif //STRATEGO_GAMESTATE_H

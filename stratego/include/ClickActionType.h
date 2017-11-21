@@ -5,13 +5,15 @@
 #ifndef STRATEGO_CLICKACTIONTYPE_H
 #define STRATEGO_CLICKACTIONTYPE_H
 
-enum class ClickActionType {
-    RESET_ACTION,
-    EXIT_ACTION,
-    NEXT_ACTION,
-    SETUP_ACTION,
-    BOARD_ACTION,
-    CONTAINER_ACTION
-};
+namespace stratego {
+    enum class ClickActionType {
+        RESET_ACTION,
+        EXIT_ACTION,
+        NEXT_ACTION,
+        SETUP_ACTION,
+        BOARD_ACTION,
+        CONTAINER_ACTION
+    };
+}
 
 #endif //STRATEGO_CLICKACTIONTYPE_H
