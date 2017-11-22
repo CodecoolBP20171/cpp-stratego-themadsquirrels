@@ -2,11 +2,14 @@
 // Created by lmolnar on 10/25/17.
 //
 
+#include "strategoTypes.h"
 #include <Texture.h>
 
 namespace stratego {
-    Texture::Texture(SDL_Texture* texture)
-            : texture(texture) {
+    Texture::Texture(const sptr<SDL_Renderer>& renderer, const std::string fileName)
+            : texture(IMG_LoadTexture_RW(renderer.get(),
+                                      SDL_RWFromFile(fileName.c_str(), "rb"),
+                                      1)) {
         SDL_QueryTexture(texture, nullptr, nullptr, &width, &height);
     }
 
