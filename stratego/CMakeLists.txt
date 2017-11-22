@@ -19,6 +19,6 @@ set(SOURCE_FILES src/main.cpp
         src/Game.cpp
         src/Player.cpp
         src/Selection.cpp
-        src/Clickable.cpp)
+        src/Clickable.cpp src/Resources.cpp include/Resources.h include/PlayerColor.h)
 add_executable(stratego ${SOURCE_FILES})
 target_link_libraries(stratego ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES})
