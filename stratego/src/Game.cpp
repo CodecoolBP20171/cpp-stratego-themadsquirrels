@@ -22,6 +22,7 @@ namespace stratego {
             switch(gameState) {
                 case GameState::PLAYER_TURN: {
                     playerTurn();
+                    // TODO: Complete flowchart implementation
                     break;
                 }
                 case GameState::SWITCHING: {
@@ -29,17 +30,17 @@ namespace stratego {
                         waitForInput();
                         // handleTurnClick() ??? taken from flowchart
                         if (gameState == GameState::PLAYER_TURN) {
-                            // TODO: Execute the created player move
-                            // should this than be a field of game?
+                            // TODO: Call execute() on the created PlayerMove object
+                            // should this then be a field of game?
                             checkForWin();
-                            // TODO: Flip pieces
+                            // TODO: Flip pieces and change player
                         }
                     }
                     break;
                 }
+                case GameState::EXIT:
                 case GameState::PLAYER_WIN:
-                case GameState::RESET:
-                case GameState::EXIT: {
+                case GameState::RESET: {
                     return gameState;
                 }
             }
@@ -47,11 +48,11 @@ namespace stratego {
     }
 
     void Game::checkForWin() {
-
+        // TODO: Implement win condition
     }
 
     void Game::loadResources() {
-
+        // TODO: load resources here
     }
 
     void Game::playerSetup() {
@@ -61,20 +62,22 @@ namespace stratego {
             switch (gameState) {
                 case GameState::PLAYER_SETUP: {
                     if (selection2 != nullptr) {
-                        // TODO: switch two selected pieces
+                        // TODO: Switch two selected pieces
                     }
                     render();
                     break;
                 }
                 case GameState::SWITCHING: {
-                    // TODO: proper condition for exiting function.
+                    // TODO: Proper condition for exiting function.
                     // currentPlayer.getContainer.size() == 0
                     if (false) {
                         return;
                     }
+                    gameState = GameState::PLAYER_SETUP;
                     break;
                 }
-                case GameState::EXIT: {
+                case GameState::EXIT:
+                case GameState::RESET: {
                     return;
                 }
             }
@@ -82,16 +85,16 @@ namespace stratego {
     }
 
     void Game::playerTurn() {
-        while (gameState) {
+        while (gameState == GameState::PLAYER_TURN) {
             waitForInput();
             handleTurnClick();
             switch (gameState) {
                 case GameState::SWITCHING: {
-                    // TODO: create PlayerMove object
+                    // TODO: Create PlayerMove object
                     return;
                 }
-                case GameState::RESET:
-                case GameState::EXIT: {
+                case GameState::EXIT:
+                case GameState::RESET: {
                     return;
                 }
             }
