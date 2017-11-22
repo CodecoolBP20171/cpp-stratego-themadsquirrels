@@ -41,6 +41,7 @@ namespace stratego {
         void render();
         void reset();
         void handleSetupClick();
+        void handleTurnClick();
         void waitForInput();
     };
 }

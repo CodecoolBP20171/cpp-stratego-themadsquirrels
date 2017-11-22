@@ -6,10 +6,12 @@
 
 namespace stratego {
 
-    Game::Game() :
-            gameState(GameState::PLAYER_SETUP) {
+    Game::Game() {
         loadResources();
-        currentPlayer = player1;
+        // TODO: init fields
+        // create menu (buttons)
+        // create board
+        // create players (piece containers, pieces)
     }
 
     GameState Game::run() {
@@ -23,6 +25,16 @@ namespace stratego {
                     break;
                 }
                 case GameState::SWITCHING: {
+                    while (gameState == GameState::SWITCHING) {
+                        waitForInput();
+                        // handleTurnClick() ??? taken from flowchart
+                        if (gameState == GameState::PLAYER_TURN) {
+                            // TODO: Execute the created player move
+                            // should this than be a field of game?
+                            checkForWin();
+                            // TODO: Flip pieces
+                        }
+                    }
                     break;
                 }
                 case GameState::PLAYER_WIN:
@@ -70,10 +82,26 @@ namespace stratego {
     }
 
     void Game::playerTurn() {
-
+        while (gameState) {
+            waitForInput();
+            handleTurnClick();
+            switch (gameState) {
+                case GameState::SWITCHING: {
+                    // TODO: create PlayerMove object
+                    return;
+                }
+                case GameState::RESET:
+                case GameState::EXIT: {
+                    return;
+                }
+            }
+        }
     }
 
     void Game::reset() {
+        // TODO: Move pieces from board to containers
+        gameState = GameState::PLAYER_SETUP;
+        currentPlayer = player1;
         playerSetup();
         if (gameState == GameState::EXIT) return;
         currentPlayer = player2;
