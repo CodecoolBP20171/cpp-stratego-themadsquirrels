@@ -9,12 +9,11 @@ namespace stratego {
 
     class Renderable {
     public:
-        explicit Renderable(sptr<Texture>& texture, sptr<SDL_Renderer>& renderer);
+        explicit Renderable(sptr<Texture>& texture);
         virtual void render(GameState gs) = 0;
         void setPosition(int x, int y);
     protected:
         const sptr<Texture> texture;
-        const sptr<SDL_Renderer> renderer;
         SDL_Rect rect;
     };
 }

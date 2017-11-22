@@ -8,41 +8,44 @@
 #include <map>
 #include <vector>
 #include "strategoTypes.h"
-#include "PieceType.h"
+#include "renderable/PieceType.h"
 #include "Texture.h"
 #include "PlayerColor.h"
 
 namespace stratego {
     class Resources {
-    public:
-        static sptr<Resources>& getInstance();
-
-        sptr<const Texture>& getFrontFace(PlayerColor pc, PieceType pt);
-        sptr<const Texture>& getBackFace(PlayerColor pc);
-        sptr<const Texture>& getBoardBackground();
-        sptr<const Texture>& getMenuBackground();
-        /** index 0=next, 1=reset, 2=exit */
-        sptr<const Texture>& getIcon(size_t index);
-        sptr<const Texture>& getPieceContainerBackground();
-        sptr<const Texture>& getSelection();
-        sptr<const SDL_Renderer>& getRenderer();
-
-    private:
         static sptr<Resources> instance;
+    public:
+
+        static sptr<Resources>& getInstance();
+        sptr<Texture>& getFrontFace(PlayerColor pc, PieceType pt);
+        sptr<Texture>& getBackFace(PlayerColor pc);
+        sptr<Texture>& getBoardBackground();
+        sptr<Texture>& getMenuBackground();
+        /** index 0=next, 1=reset, 2=exit */
+        sptr<Texture>& getIcon(size_t index);
+        sptr<Texture>& getPieceContainerBackground();
+        sptr<Texture>& getSelection();
+        sptr<Texture>& getPlayerBackground();
+
+        SDL_Renderer* getRenderer();
+    private:
 
         // TODO: Add textures for new game screen and player name
-        uptr<SDL_Window> window;
-        sptr<SDL_Renderer> renderer;
-        sptr<const Texture> boardBackground;
-        sptr<const Texture> menuBackground;
-        sptr<const Texture> pieceContainerBackground;
-        sptr<const Texture> selection;
-        std::map<PlayerColor, sptr<const Texture>> backFaces;
-        std::map<PieceType, sptr<const Texture>> blueFrontFaces;
-        std::map<PieceType, sptr<const Texture>> redFrontFaces;
-        std::vector<sptr<const Texture>> icons;
+        std::unique_ptr<SDL_Window, sdl_deleter> window;
+        std::unique_ptr<SDL_Renderer, sdl_deleter> renderer;
+        sptr<Texture> boardBackground;
+        sptr<Texture> menuBackground;
+        sptr<Texture> pieceContainerBackground;
+        sptr<Texture> selection;
+        sptr<Texture> playerbackground;
+        std::map<PlayerColor, sptr<Texture>> backFaces;
+        std::map<PieceType, sptr<Texture>> blueFrontFaces;
+        std::map<PieceType, sptr<Texture>> redFrontFaces;
+        std::vector<sptr<Texture>> icons;
 
         Resources();
+        void loadTextures();
     };
 }
 

@@ -7,7 +7,7 @@
 namespace stratego {
     class Board : public DisplayMatrix {
     public:
-        Board(sptr<Texture>& texture, sptr<SDL_Renderer>& renderer, int pieceSize);
+        Board();
         bool isValidMove(sptr<const Selection>& s1, sptr<const Selection>& s2);
     };
 }

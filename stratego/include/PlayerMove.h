@@ -10,8 +10,6 @@
 #include "renderable/Player.h"
 #include "renderable/Selection.h"
 
-using sptr = std::shared_ptr;
-
 namespace stratego {
     class PlayerMove {
     public:

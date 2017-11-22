@@ -7,12 +7,8 @@
 
 namespace stratego {
     enum class ClickActionType {
-        RESET_ACTION,
-        EXIT_ACTION,
-        NEXT_ACTION,
-        SETUP_ACTION,
-        BOARD_ACTION,
-        CONTAINER_ACTION
+        MENU_ACTION,
+        MATRIX_ACTION
     };
 }
 

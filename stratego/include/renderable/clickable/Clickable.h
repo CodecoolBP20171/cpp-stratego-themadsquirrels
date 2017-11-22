@@ -7,9 +7,8 @@
 namespace stratego {
     class Clickable : public Renderable{
     public:
-        Clickable(sptr<Texture>& texture, sptr<SDL_Renderer>& renderer);
-        virtual void render(GameState gs) = 0;
-    private:
+        Clickable(sptr<Texture>& texture, ClickActionType type);
+    protected:
         ClickActionType type;
     };
 }

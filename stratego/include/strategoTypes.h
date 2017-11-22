@@ -2,6 +2,7 @@
 #define STRATEGO_STRATEGOTYPES_H
 
 #include <memory>
+#include <SDL.h>
 
 namespace stratego {
     // TODO: remove
@@ -14,6 +15,14 @@ namespace stratego {
     using uptr = std::unique_ptr<T>;
     template<typename T>
     using wptr = std::weak_ptr<T>;
+
+    struct sdl_deleter {
+        void operator()(SDL_Window* p) const { SDL_DestroyWindow(p); }
+
+        void operator()(SDL_Renderer* p) const { SDL_DestroyRenderer(p); }
+
+        void operator()(SDL_Texture* p) const { SDL_DestroyTexture(p); }
+    };
 
     struct coord {
         int x, y;

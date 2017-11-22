@@ -1,9 +1,8 @@
 #include <renderable/Renderable.h>
 
 namespace stratego {
-    Renderable::Renderable(sptr<Texture>& texture, sptr<SDL_Renderer>& renderer)
+    Renderable::Renderable(sptr<Texture>& texture)
             : texture(texture),
-              renderer(renderer),
               rect(texture->getDimensions()) {}
 
     void Renderable::setPosition(int x, int y) {

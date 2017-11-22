@@ -10,14 +10,14 @@ namespace stratego {
     class Player;
     class Piece : public Renderable {
     public:
-        explicit Piece(PieceType type, sptr<Player>& player, Resources& resources);
-        sptr<Player> getPlayerContainer();
+        explicit Piece(PieceType type, sptr<Player>& player);
+        sptr<Player> getPlayer();
         void render(GameState gs) override;
     private:
         const PieceType type;
         const wptr<Player> player;
         // front texture stored in Renderable::texture
-        const sptr<Texture> backTexture;
+        sptr<Texture> backTexture;
     };
 }
 

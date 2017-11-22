@@ -6,6 +6,7 @@
 #define STRATEGO_PLAYERCOLOR_H
 
 namespace stratego {
+
     enum class PlayerColor {
         BLUE,
         RED

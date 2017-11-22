@@ -6,10 +6,10 @@
 namespace stratego {
     class PieceContainer : public DisplayMatrix {
     public:
-        PieceContainer(sptr<Texture>& texture, sptr<SDL_Renderer>& renderer, int pieceSize);
+        PieceContainer();
         void addPiece(sptr<Piece>& piece);
     private:
-        coord findEmptyPos();
+        int findEmptyPos();
     };
 }
 

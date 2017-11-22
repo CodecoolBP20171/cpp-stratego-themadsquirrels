@@ -18,7 +18,6 @@ namespace stratego {
     class Game {
     public:
         Game();
-
         GameState run();
 
     private:
