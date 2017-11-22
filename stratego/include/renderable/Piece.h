@@ -13,9 +13,13 @@ namespace stratego {
         explicit Piece(PieceType type, sptr<Player>& player);
         sptr<Player> getPlayer();
         void render(GameState gs) override;
+
+        const PieceType getType() const;
+
     private:
         const PieceType type;
         const wptr<Player> player;
+        bool faceUp;
         // front texture stored in Renderable::texture
         sptr<Texture> backTexture;
     };

@@ -11,7 +11,8 @@ namespace stratego {
     public:
         Selection(int x, int y, sptr<DisplayMatrix>& selectedMatrix, sptr<Piece>& selectedPiece);
         void render(GameState gs) override;
-
+        coord getCoord() const;
+        PieceType getPieceType() const;
     private:
         int x, y;
         sptr<DisplayMatrix> selectedMatrix;

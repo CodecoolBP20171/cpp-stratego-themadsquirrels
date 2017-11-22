@@ -3,11 +3,27 @@
 
 namespace stratego {
 
-    PieceContainer::PieceContainer()
-            : DisplayMatrix(Resources::getInstance()->getPieceContainerBackground(), 5, 8)
-              {}
+    PieceContainer::PieceContainer(sptr<Player> player)
+            : DisplayMatrix(Resources::getInstance()->getPieceContainerBackground(), 5, 8) {
+        pieces.reserve(40);
+        pieces.emplace_back(new Piece(PieceType::FLAG, player));
+        pieces.emplace_back(new Piece(PieceType::SPY, player));
+        pieces.emplace_back(new Piece(PieceType::GENERAL, player));
+        pieces.emplace_back(new Piece(PieceType::MARSHALL, player));
+        pieces.emplace_back(new Piece(PieceType::COLONEL, player));
+        pieces.emplace_back(new Piece(PieceType::COLONEL, player));
+        for (int i = 0; i < 6; ++i) pieces.emplace_back(new Piece(PieceType::BOMB, player));
+        for (int i = 0; i < 8; ++i) pieces.emplace_back(new Piece(PieceType::SCOUT, player));
+        for (int i = 0; i < 5; ++i) pieces.emplace_back(new Piece(PieceType::MINER, player));
+        for (int i = 0; i < 4; ++i) {
+            pieces.emplace_back(new Piece(PieceType::SERGANT, player));
+            pieces.emplace_back(new Piece(PieceType::LIEUTENANT, player));
+            pieces.emplace_back(new Piece(PieceType::CAPTAIN, player));
+        }
+        for (int i = 0; i < 3; ++i) pieces.emplace_back(new Piece(PieceType::MAJOR, player));
+    }
 
-    void PieceContainer::addPiece(sptr<Piece>& piece) {
+    void PieceContainer::addPiece(sptr<Piece> &piece) {
         pieces[findEmptyPos()] = piece;
     }
 

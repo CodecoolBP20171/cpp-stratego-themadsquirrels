@@ -6,7 +6,7 @@
 namespace stratego {
     class PieceContainer : public DisplayMatrix {
     public:
-        PieceContainer();
+        PieceContainer(sptr<Player> player);
         void addPiece(sptr<Piece>& piece);
     private:
         int findEmptyPos();
