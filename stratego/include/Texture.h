@@ -8,6 +8,7 @@
 #include <string>
 #include <memory>
 #include <SDL_image.h>
+#include <strategoTypes.h>
 
 namespace stratego {
     class Texture {

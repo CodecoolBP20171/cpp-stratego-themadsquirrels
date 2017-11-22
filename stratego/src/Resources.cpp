@@ -26,44 +26,42 @@ namespace stratego {
         icons.emplace_back(new Texture(renderer.get(), "assets/icon_exit.png"));
     }
 
-
-    sptr<Resources> &Resources::getInstance() {
+    sptr<Resources>& Resources::getInstance() {
         if (!instance) instance = new Resources();
         return instance;
     }
 
-    sptr<const Texture> &Resources::getFrontFace(PlayerColor pc, PieceType pt) {
-        if (pc == PlayerColor::BLUE)    return blueFrontFaces[pt];
-        else                            return redFrontFaces[pt];
+    sptr<const Texture>& Resources::getFrontFace(PlayerColor pc, PieceType pt) {
+        if (pc == PlayerColor::BLUE) return blueFrontFaces[pt];
+        else return redFrontFaces[pt];
     }
 
-    sptr<const Texture> &Resources::getBackFace(PlayerColor pc) {
+    sptr<const Texture>& Resources::getBackFace(PlayerColor pc) {
         return backFaces[pc];
     }
 
-    sptr<const Texture> &Resources::getBoardBackground() {
+    sptr<const Texture>& Resources::getBoardBackground() {
         return boardBackground;
     }
 
-    sptr<const Texture> &Resources::getMenuBackground() {
+    sptr<const Texture>& Resources::getMenuBackground() {
         return menuBackground;
     }
 
-    sptr<const Texture> &Resources::getIcon(size_t index) {
+    sptr<const Texture>& Resources::getIcon(size_t index) {
         return icons[index];
     }
 
-    sptr<const Texture> &Resources::getPieceContainerBackground() {
+    sptr<const Texture>& Resources::getPieceContainerBackground() {
         return pieceContainerBackground;
     }
 
-    sptr<const Texture> &Resources::getSelection() {
+    sptr<const Texture>& Resources::getSelection() {
         return selection;
     }
 
-    sptr<const SDL_Renderer> &Resources::getRenderer() {
+    sptr<const SDL_Renderer>& Resources::getRenderer() {
         return renderer;
     }
-
 }
 
