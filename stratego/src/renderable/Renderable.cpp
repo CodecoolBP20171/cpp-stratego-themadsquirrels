@@ -1,4 +1,4 @@
-#include <Renderable.h>
+#include <renderable/Renderable.h>
 
 namespace stratego {
     Renderable::Renderable(sptr<Texture>& texture, sptr<SDL_Renderer>& renderer)

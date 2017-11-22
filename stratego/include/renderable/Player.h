@@ -1,8 +1,9 @@
 #ifndef STRATEGO_PLAYER_H
 #define STRATEGO_PLAYER_H
 
-#include <Renderable.h>
+#include <renderable/Renderable.h>
 #include <strategoTypes.h>
+#include <renderable/clickable/displayMatrix/PieceContainer.h>
 
 namespace stratego {
     class Player : public Renderable {

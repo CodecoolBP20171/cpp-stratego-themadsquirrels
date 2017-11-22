@@ -5,10 +5,7 @@
 
 namespace stratego {
     // TODO: remove
-    class PieceContainer;
     class Resources;
-    class Board;
-    class DisplayMatrix;
     // TODO: end remove
 
     template<typename T>
@@ -17,6 +14,12 @@ namespace stratego {
     using uptr = std::unique_ptr<T>;
     template<typename T>
     using wptr = std::weak_ptr<T>;
+
+    struct coord {
+        int x, y;
+
+        coord(int x, int y) : x(x), y(y) {}
+    };
 }
 
 #endif //STRATEGO_STRATEGOTYPES_H

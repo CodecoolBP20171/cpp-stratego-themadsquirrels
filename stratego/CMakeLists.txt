@@ -11,14 +11,20 @@ PKG_SEARCH_MODULE(SDL2IMAGE REQUIRED SDL2_image>=2.0.0)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-set(SOURCE_FILES src/main.cpp
-        src/Renderable.cpp
+set(SOURCE_FILES
+        include/strategoTypes.h
+        src/main.cpp
+        src/renderable/Renderable.cpp
         src/Texture.cpp
-        src/Piece.cpp
+        src/renderable/Piece.cpp
         src/PlayerMove.cpp
         src/Game.cpp
-        src/Player.cpp
-        src/Selection.cpp
-        src/Clickable.cpp)
+        src/renderable/Player.cpp
+        src/renderable/Selection.cpp
+        src/renderable/clickable/Clickable.cpp
+        src/renderable/clickable/displayMatrix/DisplayMatrix.cpp
+        src/renderable/clickable/displayMatrix/Board.cpp
+        src/renderable/clickable/displayMatrix/PieceContainer.cpp
+        src/renderable/clickable/Menu.cpp)
 add_executable(stratego ${SOURCE_FILES})
 target_link_libraries(stratego ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES})

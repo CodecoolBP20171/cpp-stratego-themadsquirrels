@@ -7,8 +7,8 @@
 
 #include <memory>
 #include "strategoTypes.h"
-#include "Player.h"
-#include "Selection.h"
+#include "renderable/Player.h"
+#include "renderable/Selection.h"
 
 using sptr = std::shared_ptr;
 

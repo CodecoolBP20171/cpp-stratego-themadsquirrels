@@ -1,4 +1,4 @@
-#include <Piece.h>
+#include <renderable/Piece.h>
 
 namespace stratego {
     Piece::Piece(PieceType type, sptr<Player>& player, Resources& resources)
@@ -11,8 +11,9 @@ namespace stratego {
         // TODO
     }
 
-    PieceContainer& Piece::getPlayerContainer() {
-        // TODO
-        return player.getPieceContainer();
+    sptr<Player> Piece::getPlayerContainer() {
+        auto pl = player.lock();
+        if(pl) return pl;
+        else throw std::bad_weak_ptr();
     }
 }

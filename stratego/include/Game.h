@@ -8,10 +8,11 @@
 #include <vector>
 #include "strategoTypes.h"
 #include "GameState.h"
-#include <Renderable.h>
-#include <Player.h>
-#include <Clickable.h>
-#include <Selection.h>
+#include <renderable/Renderable.h>
+#include <renderable/Player.h>
+#include <renderable/clickable/Clickable.h>
+#include <renderable/Selection.h>
+#include <renderable/clickable/displayMatrix/Board.h>
 
 namespace stratego {
     class Game {

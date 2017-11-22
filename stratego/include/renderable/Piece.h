@@ -1,21 +1,21 @@
 #ifndef STRATEGO_PIECE_H
 #define STRATEGO_PIECE_H
 
-#include <Renderable.h>
+#include <renderable/Renderable.h>
 #include <strategoTypes.h>
 #include "PieceType.h"
 #include "GameState.h"
-#include <Player.h>
 
 namespace stratego {
+    class Player;
     class Piece : public Renderable {
     public:
         explicit Piece(PieceType type, sptr<Player>& player, Resources& resources);
-        PieceContainer& getPlayerContainer();
+        sptr<Player> getPlayerContainer();
         void render(GameState gs) override;
     private:
         const PieceType type;
-        const sptr<Player> player;
+        const wptr<Player> player;
         // front texture stored in Renderable::texture
         const sptr<Texture> backTexture;
     };
