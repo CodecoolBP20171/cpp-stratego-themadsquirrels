@@ -13,6 +13,12 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 set(SOURCE_FILES src/main.cpp
         src/Renderable.cpp
-        src/Texture.cpp src/Piece.cpp include/Piece.h include/GameState.h include/PieceType.h include/ClickActionType.h src/PlayerMove.cpp include/PlayerMove.h src/Game.cpp include/Game.h)
+        src/Texture.cpp
+        src/Piece.cpp
+        src/PlayerMove.cpp
+        src/Game.cpp
+        src/Player.cpp
+        src/Selection.cpp
+        src/Clickable.cpp)
 add_executable(stratego ${SOURCE_FILES})
 target_link_libraries(stratego ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES})

@@ -5,6 +5,7 @@
 #include <strategoTypes.h>
 #include "PieceType.h"
 #include "GameState.h"
+#include <Player.h>
 
 namespace stratego {
     class Piece : public Renderable {
@@ -14,9 +15,9 @@ namespace stratego {
         void render(GameState gs) override;
     private:
         const PieceType type;
-        const std::weak_ptr<Player> player;
+        const sptr<Player> player;
         // front texture stored in Renderable::texture
-        const std::weak_ptr<Texture> backTexture;
+        const sptr<Texture> backTexture;
     };
 }
 

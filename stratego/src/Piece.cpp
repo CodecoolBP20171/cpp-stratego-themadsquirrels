@@ -1,7 +1,7 @@
 #include <Piece.h>
 
 namespace stratego {
-    Piece::Piece(PieceType type, PlayerSPtr& player, Resources& resources)
+    Piece::Piece(PieceType type, sptr<Player>& player, Resources& resources)
             : Renderable(resources.getFrontTexture(type), resources.getRenderer()),
               type(type),
               player(player),
@@ -13,6 +13,6 @@ namespace stratego {
 
     PieceContainer& Piece::getPlayerContainer() {
         // TODO
-        return <#initializer#>;
+        return player.getPieceContainer();
     }
 }
