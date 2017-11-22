@@ -31,12 +31,17 @@ namespace stratego {
         std::vector<sptr<Clickable>> clickObjects;
         sptr<Selection> selection1;
         sptr<Selection> selection2;
+        int mouseX;
+        int mouseY;
 
         void checkForWin();
         void loadResources();
         void playerSetup();
         void playerTurn();
+        void render();
         void reset();
+        void handleSetupClick();
+        void waitForInput();
     };
 }
 
