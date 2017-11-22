@@ -25,6 +25,7 @@ set(SOURCE_FILES
         src/renderable/clickable/displayMatrix/DisplayMatrix.cpp
         src/renderable/clickable/displayMatrix/Board.cpp
         src/renderable/clickable/displayMatrix/PieceContainer.cpp
-        src/renderable/clickable/Menu.cpp)
+        src/renderable/clickable/Menu.cpp
+        src/Resources.cpp)
 add_executable(stratego ${SOURCE_FILES})
 target_link_libraries(stratego ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES})

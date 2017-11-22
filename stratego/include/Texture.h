@@ -8,11 +8,12 @@
 #include <string>
 #include <memory>
 #include <SDL_image.h>
+#include <strategoTypes.h>
 
 namespace stratego {
     class Texture {
     public:
-        explicit Texture(SDL_Texture* texture);
+        explicit Texture(const sptr<SDL_Renderer>& renderer, const std::string fileName);
         virtual ~Texture();
         void render(SDL_Renderer* renderer, const SDL_Rect* pos);
         SDL_Rect getDimensions();
