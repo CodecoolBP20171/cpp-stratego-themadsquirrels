@@ -43,4 +43,21 @@ namespace stratego {
         }
         throw std::length_error("panic");
     }
+
+    const ClickActionType PieceContainer::evaluateClick(const coord& mouse) const {
+        if(active) return Clickable::evaluateClick(mouse);
+        else return ClickActionType::OUTSIDE;
+    }
+
+    void PieceContainer::activate() {
+        active = true;
+    }
+
+    void PieceContainer::deactivate() {
+        active = false;
+    }
+
+    void PieceContainer::render(GameState gs) {
+        if(active) DisplayMatrix::render(gs);
+    }
 }

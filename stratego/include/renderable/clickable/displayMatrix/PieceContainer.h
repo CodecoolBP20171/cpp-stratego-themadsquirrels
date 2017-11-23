@@ -8,7 +8,12 @@ namespace stratego {
     public:
         PieceContainer(sptr<Player> player);
         void addPiece(sptr<Piece>& piece);
+        const ClickActionType evaluateClick(const coord& mouse) const override;
+        void activate();
+        void deactivate();
+        void render(GameState gs) override;
     private:
+        bool active;
         int findEmptyPos();
     };
 }
