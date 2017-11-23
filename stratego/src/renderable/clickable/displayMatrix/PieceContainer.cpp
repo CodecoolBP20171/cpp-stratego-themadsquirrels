@@ -3,27 +3,10 @@
 
 namespace stratego {
 
-    PieceContainer::PieceContainer(sptr<Player> player)
+    PieceContainer::PieceContainer()
             : DisplayMatrix(Resources::getInstance()->getPieceContainerBackground(),
                             5, 8,
-                            ClickActionType::CONTAINER) {
-        pieces.reserve(40);
-        pieces.emplace_back(new Piece(PieceType::FLAG, player));
-        pieces.emplace_back(new Piece(PieceType::SPY, player));
-        pieces.emplace_back(new Piece(PieceType::GENERAL, player));
-        pieces.emplace_back(new Piece(PieceType::MARSHALL, player));
-        pieces.emplace_back(new Piece(PieceType::COLONEL, player));
-        pieces.emplace_back(new Piece(PieceType::COLONEL, player));
-        for (int i = 0; i < 6; ++i) pieces.emplace_back(new Piece(PieceType::BOMB, player));
-        for (int i = 0; i < 8; ++i) pieces.emplace_back(new Piece(PieceType::SCOUT, player));
-        for (int i = 0; i < 5; ++i) pieces.emplace_back(new Piece(PieceType::MINER, player));
-        for (int i = 0; i < 4; ++i) {
-            pieces.emplace_back(new Piece(PieceType::SERGANT, player));
-            pieces.emplace_back(new Piece(PieceType::LIEUTENANT, player));
-            pieces.emplace_back(new Piece(PieceType::CAPTAIN, player));
-        }
-        for (int i = 0; i < 3; ++i) pieces.emplace_back(new Piece(PieceType::MAJOR, player));
-    }
+                            ClickActionType::CONTAINER) {}
 
     void PieceContainer::addPiece(sptr<Piece>& piece) {
         int idx = findEmptyPos();
@@ -45,7 +28,7 @@ namespace stratego {
     }
 
     const ClickActionType PieceContainer::evaluateClick(const coord& mouse) const {
-        if(active) return Clickable::evaluateClick(mouse);
+        if (active) return Clickable::evaluateClick(mouse);
         else return ClickActionType::OUTSIDE;
     }
 
@@ -58,6 +41,25 @@ namespace stratego {
     }
 
     void PieceContainer::render(GameState gs) {
-        if(active) DisplayMatrix::render(gs);
+        if (active) DisplayMatrix::render(gs);
+    }
+
+    void PieceContainer::initPieces(sptr<Player>& player) {
+        pieces.reserve(40);
+        pieces.emplace_back(new Piece(PieceType::FLAG, player));
+        pieces.emplace_back(new Piece(PieceType::SPY, player));
+        pieces.emplace_back(new Piece(PieceType::GENERAL, player));
+        pieces.emplace_back(new Piece(PieceType::MARSHALL, player));
+        pieces.emplace_back(new Piece(PieceType::COLONEL, player));
+        pieces.emplace_back(new Piece(PieceType::COLONEL, player));
+        for (int i = 0; i < 6; ++i) pieces.emplace_back(new Piece(PieceType::BOMB, player));
+        for (int i = 0; i < 8; ++i) pieces.emplace_back(new Piece(PieceType::SCOUT, player));
+        for (int i = 0; i < 5; ++i) pieces.emplace_back(new Piece(PieceType::MINER, player));
+        for (int i = 0; i < 4; ++i) {
+            pieces.emplace_back(new Piece(PieceType::SERGANT, player));
+            pieces.emplace_back(new Piece(PieceType::LIEUTENANT, player));
+            pieces.emplace_back(new Piece(PieceType::CAPTAIN, player));
+        }
+        for (int i = 0; i < 3; ++i) pieces.emplace_back(new Piece(PieceType::MAJOR, player));
     }
 }

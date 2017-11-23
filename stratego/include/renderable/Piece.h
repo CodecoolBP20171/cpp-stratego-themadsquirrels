@@ -11,6 +11,7 @@ namespace stratego {
     class Piece : public Renderable {
     public:
         explicit Piece(PieceType type, sptr<Player>& player);
+        Piece(PieceType type);
         sptr<Player> getPlayer();
         void render(GameState gs) override;
         const PieceType getType() const;

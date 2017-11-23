@@ -10,6 +10,13 @@ namespace stratego {
               _faceUp(true),
               backTexture(Resources::getInstance()->getBackFace(player->getPlayerColor())) {}
 
+    Piece::Piece(PieceType type)
+    : Renderable(Resources::getInstance()->getEmptyPiece()),
+      type(type),
+      _faceUp(true),
+      backTexture(Resources::getInstance()->getEmptyPiece()){
+    }
+
     void Piece::render(GameState gs) {
         if(_faceUp) texture->render(&rect);
         else backTexture->render(&rect);

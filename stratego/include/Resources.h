@@ -26,7 +26,8 @@ namespace stratego {
         sptr<Texture>& getIcon(size_t index);
         sptr<Texture>& getPieceContainerBackground();
         sptr<Texture>& getSelection();
-        sptr <Texture>& getPlayerIcon(PlayerColor pc);
+        sptr<Texture>& getPlayerIcon(PlayerColor pc);
+        sptr<Texture>& getEmptyPiece();
 
         SDL_Renderer* getRenderer();
     private:
@@ -38,6 +39,7 @@ namespace stratego {
         sptr<Texture> menuBackground;
         sptr<Texture> pieceContainerBackground;
         sptr<Texture> selection;
+        sptr<Texture> emptyPiece;
         std::map<PlayerColor, sptr<Texture>> playerIcon;
         std::map<PlayerColor, sptr<Texture>> backFaces;
         std::map<PieceType, sptr<Texture>> blueFrontFaces;

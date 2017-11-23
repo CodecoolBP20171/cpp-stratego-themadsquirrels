@@ -8,17 +8,16 @@ namespace stratego {
                             10, 10,
                             ClickActionType::BOARD) {
         pieces.reserve(100);
-        sptr<Player> noplayer = nullptr;
-        for (int i = 0; i < 100; ++i) pieces.emplace_back(new Piece(PieceType::EMPTY, noplayer));
-        pieces[gridCoordToLinear({2, 5})] = sptr<Piece>(new Piece(PieceType::WATER, noplayer));
-        pieces[gridCoordToLinear({2, 6})] = sptr<Piece>(new Piece(PieceType::WATER, noplayer));
-        pieces[gridCoordToLinear({3, 5})] = sptr<Piece>(new Piece(PieceType::WATER, noplayer));
-        pieces[gridCoordToLinear({3, 6})] = sptr<Piece>(new Piece(PieceType::WATER, noplayer));
+        for (int i = 0; i < 100; ++i) pieces.emplace_back(new Piece(PieceType::EMPTY));
+        pieces[gridCoordToLinear({2, 5})] = sptr<Piece>(new Piece(PieceType::WATER));
+        pieces[gridCoordToLinear({2, 6})] = sptr<Piece>(new Piece(PieceType::WATER));
+        pieces[gridCoordToLinear({3, 5})] = sptr<Piece>(new Piece(PieceType::WATER));
+        pieces[gridCoordToLinear({3, 6})] = sptr<Piece>(new Piece(PieceType::WATER));
 
-        pieces[gridCoordToLinear({6, 5})] = sptr<Piece>(new Piece(PieceType::WATER, noplayer));
-        pieces[gridCoordToLinear({6, 6})] = sptr<Piece>(new Piece(PieceType::WATER, noplayer));
-        pieces[gridCoordToLinear({7, 5})] = sptr<Piece>(new Piece(PieceType::WATER, noplayer));
-        pieces[gridCoordToLinear({7, 6})] = sptr<Piece>(new Piece(PieceType::WATER, noplayer));
+        pieces[gridCoordToLinear({6, 5})] = sptr<Piece>(new Piece(PieceType::WATER));
+        pieces[gridCoordToLinear({6, 6})] = sptr<Piece>(new Piece(PieceType::WATER));
+        pieces[gridCoordToLinear({7, 5})] = sptr<Piece>(new Piece(PieceType::WATER));
+        pieces[gridCoordToLinear({7, 6})] = sptr<Piece>(new Piece(PieceType::WATER));
     }
 
     bool Board::isValidMove(sptr<Selection>& s1, sptr<Selection>& s2) {

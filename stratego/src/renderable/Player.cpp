@@ -1,6 +1,7 @@
 #include <renderable/Player.h>
 #include <Resources.h>
 #include <caca_conio.h>
+#include <iostream>
 
 namespace stratego {
 
@@ -8,7 +9,7 @@ namespace stratego {
             : Renderable(Resources::getInstance()->getPlayerIcon(pc)),
               name(name),
               pc(pc),
-              unusedPieces(new PieceContainer(sptr<Player>(this))) {}
+              unusedPieces(new PieceContainer()) {}
 
     sptr<PieceContainer>& Player::getPieceContainer() {
         return unusedPieces;
@@ -31,5 +32,9 @@ namespace stratego {
             texture->render(&rect);
             unusedPieces->render(gs);
         }
+    }
+
+    void Player::initContainer(sptr<Player>& player) {
+        unusedPieces->initPieces(player);
     }
 }

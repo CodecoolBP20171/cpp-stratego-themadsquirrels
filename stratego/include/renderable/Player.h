@@ -10,6 +10,7 @@ namespace stratego {
     class Player : public Renderable {
     public:
         Player(const std::string& name, PlayerColor pc);
+        void initContainer(sptr<Player>& player);
         sptr<PieceContainer>& getPieceContainer();
         PlayerColor getPlayerColor() const;
         void activate();

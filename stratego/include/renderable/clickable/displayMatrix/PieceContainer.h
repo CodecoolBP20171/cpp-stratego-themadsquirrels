@@ -6,7 +6,8 @@
 namespace stratego {
     class PieceContainer : public DisplayMatrix {
     public:
-        PieceContainer(sptr<Player> player);
+        PieceContainer();
+        void initPieces(sptr<Player>& player);
         void addPiece(sptr<Piece>& piece);
         const ClickActionType evaluateClick(const coord& mouse) const override;
         void activate();

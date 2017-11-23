@@ -3,7 +3,8 @@
 
 namespace stratego {
     Selection::Selection()
-            : Renderable(Resources::getInstance()->getSelection()) {}
+            : Renderable(Resources::getInstance()->getSelection()),
+              active(false) {}
 
     void Selection::render(GameState gs) {
         if (active) texture->render(&rect);

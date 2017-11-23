@@ -11,8 +11,12 @@ namespace stratego {
             lastAction(nullptr, nullptr, nullptr),
             board(new Board()),
             player1(new Player("P1", PlayerColor::BLUE)),
-            player2(new Player("P2", PlayerColor::RED)) {
+            player2(new Player("P2", PlayerColor::RED)),
+            selection1(new Selection()),
+            selection2(new Selection()) {
         board->setPosition(0, 0);
+        player1->initContainer(player1);
+        player2->initContainer(player2);
         player1->setPosition(640, 64);
         player2->setPosition(640, 64);
         sptr<Menu> menu(new Menu({640, 0}));
@@ -148,6 +152,9 @@ namespace stratego {
     }
 
     void Game::render() {
+        for (auto& renderable : renderObjects) {
+            renderable->render(gameState);
+        }
         // Update the screen - last line
         SDL_RenderPresent(Resources::getInstance()->getRenderer());
     }
@@ -231,7 +238,7 @@ namespace stratego {
 
     ClickActionType Game::determineClickType() {
         ClickActionType clickType;
-        for (auto clickable : clickObjects) {
+        for (auto& clickable : clickObjects) {
             clickType = clickable.get()->evaluateClick(mouse);
             if (clickType != ClickActionType::OUTSIDE) {
                 return clickType;

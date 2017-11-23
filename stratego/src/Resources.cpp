@@ -36,6 +36,7 @@ namespace stratego {
             blueFrontFaces[static_cast<PieceType>(i)] = sptr<Texture>(new Texture("piece_" + std::to_string(i) + "_blue.png"));
             redFrontFaces[static_cast<PieceType>(i)] = sptr<Texture>(new Texture("piece_" + std::to_string(i) + "_red.png"));
         }
+        emptyPiece = sptr<Texture>(new Texture("assets/piece_empty.png"));
         icons.emplace_back(new Texture("assets/icon_next.png"));
         icons.emplace_back(new Texture("assets/icon_reset.png"));
         icons.emplace_back(new Texture("assets/icon_exit.png"));
@@ -76,6 +77,10 @@ namespace stratego {
 
     sptr <Texture>& Resources::getPlayerIcon(PlayerColor pc) {
         return playerIcon[pc];
+    }
+
+    sptr<Texture>& Resources::getEmptyPiece() {
+        return emptyPiece;
     }
 }
 
