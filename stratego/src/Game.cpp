@@ -145,4 +145,15 @@ namespace stratego {
     void Game::handleTurnClick() {
 
     }
+
+    ClickActionType Game::determineClickType() {
+        ClickActionType clickType;
+        for (auto clickable : clickObjects) {
+            clickType = clickable.get()->evaluateClick(mouse);
+            if (clickType != ClickActionType::OUTSIDE) {
+                return clickType;
+            }
+        }
+        return ClickActionType::OUTSIDE;
+    }
 }

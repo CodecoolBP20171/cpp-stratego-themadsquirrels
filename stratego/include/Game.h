@@ -46,6 +46,7 @@ namespace stratego {
         void handleSetupClick();
         void handleTurnClick();
         void waitForInput();
+        ClickActionType determineClickType();
     };
 }
 

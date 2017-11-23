@@ -7,10 +7,14 @@
 
 namespace stratego {
     enum class ClickActionType {
-        MENU_ACTION,
-        BOARD_ACTION,
-        CONTAINER_ACTION,
-        OUTSIDE
+        // TODO: Update constructors for new types
+        MENU,
+        BOARD,
+        CONTAINER,
+        OUTSIDE,
+        NEXT,
+        RESET,
+        EXIT
     };
 }
 
