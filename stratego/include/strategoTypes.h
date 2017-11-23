@@ -27,7 +27,7 @@ namespace stratego {
     struct coord {
         int x, y;
 
-        coord(int x, int y) : x(x), y(y) {}
+        coord(int x=0, int y=0) : x(x), y(y) {}
     };
 }
 
