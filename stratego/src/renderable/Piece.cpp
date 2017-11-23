@@ -25,7 +25,7 @@ namespace stratego {
     sptr<Player> Piece::getPlayer() {
         auto pl = player.lock();
         if(pl) return pl;
-        else throw std::bad_weak_ptr();
+        else return nullptr;
     }
 
     const PieceType Piece::getType() const {

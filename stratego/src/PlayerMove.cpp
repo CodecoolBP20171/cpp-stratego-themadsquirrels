@@ -6,8 +6,20 @@
 
 namespace stratego {
 
-    PlayerMove::PlayerMove(sptr<Player> player, sptr<Selection> first, sptr<Selection> second) :
-            player(player),
+    PlayerMove::PlayerMove(sptr<Selection>& first, sptr<Selection>& second) :
             firstSelection(first),
             secondSelection(second) {}
+
+    const wptr<stratego::Player>& PlayerMove::getPlayer() const {
+        return player;
+    }
+
+    void PlayerMove::setPlayer(sptr<stratego::Player>& player) {
+        PlayerMove::player = player;
+    }
+
+    bool PlayerMove::isAttack() const {
+        return !(firstSelection->getPieceType() == PieceType::EMPTY ||
+                 secondSelection->getPieceType() == PieceType::EMPTY);
+    }
 }

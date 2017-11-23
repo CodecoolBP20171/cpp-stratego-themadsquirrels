@@ -10,6 +10,8 @@ namespace stratego {
         Board();
         bool isValidMove(sptr<Selection>& s1, sptr<Selection>& s2);
         void resetPieces();
+        void flipFaceDown();
+        void flipFaceUpForPlayer(sptr<Player>& player);
     };
 }
 

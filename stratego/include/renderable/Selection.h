@@ -16,6 +16,8 @@ namespace stratego {
         void activate(coord pos, sptr<DisplayMatrix>& selectedMatrix, sptr<Piece>& selectedPiece);
         void deactivate();
         bool isActive() const;
+        void faceUp();
+        void switchWith(sptr<Selection>& other);
     private:
         int x, y;
         bool active;

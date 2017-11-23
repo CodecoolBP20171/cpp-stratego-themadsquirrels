@@ -13,4 +13,13 @@ namespace stratego {
     const coord Renderable::getDimensions() const {
         return {rect.w, rect.h};
     }
+
+    const coord Renderable::getPosition() const {
+        return {rect.x, rect.y};
+    }
+
+    void Renderable::setPosition(coord pos) {
+        rect.x = pos.x;
+        rect.y = pos.y;
+    }
 }

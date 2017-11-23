@@ -28,6 +28,6 @@ namespace stratego {
                 return actionType;
             }
         }
-        return type;
+        return Clickable::evaluateClick(mouse);
     }
 }

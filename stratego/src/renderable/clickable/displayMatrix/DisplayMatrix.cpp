@@ -58,4 +58,18 @@ namespace stratego {
             pieces[i]->setPosition(rect.x + pos.x * pieceSize, rect.y + pos.y * pieceSize);
         }
     }
+
+    bool DisplayMatrix::empty() const {
+        for(auto& piece : pieces){
+            auto type = piece->getType();
+            if(type != PieceType::EMPTY && type != PieceType::WATER){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    sptr<Piece>& DisplayMatrix::getPiece(coord pos) {
+        return pieces[gridCoordToLinear(pos)];
+    }
 }

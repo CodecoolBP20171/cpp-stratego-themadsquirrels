@@ -8,7 +8,7 @@
 namespace stratego {
 
     Game::Game() :
-            lastAction(nullptr, nullptr, nullptr),
+            lastAction(selection1, selection2),
             board(new Board()),
             player1(new Player("P1", PlayerColor::BLUE)),
             player2(new Player("P2", PlayerColor::RED)),
@@ -43,18 +43,37 @@ namespace stratego {
             switch (gameState) {
                 case GameState::PLAYER_TURN: {
                     playerTurn();
-                    // TODO: Complete flowchart implementation
+                    if (gameState == GameState::RESET || gameState == GameState::EXIT) {
+                        break;
+                    }
+                    board->flipFaceDown();
+                    if (lastAction.isAttack()) {
+                        selection1->faceUp();
+                        selection2->faceUp();
+                    }
+                    switchPlayer();
                     break;
                 }
                 case GameState::SWITCHING: {
                     while (gameState == GameState::SWITCHING) {
                         waitForInput();
-                        // handleTurnClick() ??? taken from flowchart
+                        ClickActionType clickType = determineClickType();
+                        if (clickType == ClickActionType::RESET) {
+                            gameState = GameState::RESET;
+                            break;
+                        }
+                        if (clickType == ClickActionType::EXIT) {
+                            gameState = GameState::EXIT;
+                            break;
+                        }
+                        if (clickType == ClickActionType::NEXT) {
+                            gameState = GameState::PLAYER_TURN;
+                            break;
+                        }
                         if (gameState == GameState::PLAYER_TURN) {
-                            // TODO: Call execute() on the created PlayerMove object
-                            // should this then be a field of game?
+                            //lastAction.execute();
                             checkForWin();
-                            // TODO: Flip pieces and change player
+                            board->flipFaceUpForPlayer(currentPlayer);
                         }
                     }
                     break;
@@ -62,14 +81,15 @@ namespace stratego {
                 case GameState::EXIT:
                 case GameState::PLAYER_WIN:
                 case GameState::RESET: {
-                    return gameState;
+                    quit = true;
                 }
             }
         }
+        return gameState;
     }
 
     void Game::checkForWin() {
-        if(currentPlayer->checkForFlag()) gameState = GameState::PLAYER_WIN;
+        if (currentPlayer->checkForFlag()) gameState = GameState::PLAYER_WIN;
     }
 
     void Game::playerSetup() {
@@ -78,16 +98,14 @@ namespace stratego {
             handleSetupClick();
             switch (gameState) {
                 case GameState::PLAYER_SETUP: {
-                    if (selection2 != nullptr) {
-                        // TODO: Switch two selected pieces
+                    if (selection2->isActive()) {
+                        selection1->switchWith(selection2);
                     }
                     render();
                     break;
                 }
                 case GameState::SWITCHING: {
-                    // TODO: Proper condition for exiting function.
-                    // currentPlayer.getContainer.size() == 0
-                    if (false) {
+                    if (currentPlayer->getPieceContainer()->empty()) {
                         return;
                     }
                     gameState = GameState::PLAYER_SETUP;
@@ -107,7 +125,7 @@ namespace stratego {
             handleTurnClick();
             switch (gameState) {
                 case GameState::SWITCHING: {
-                    // TODO: Create PlayerMove object
+                    lastAction.setPlayer(currentPlayer);
                     return;
                 }
                 case GameState::EXIT:
@@ -126,9 +144,12 @@ namespace stratego {
         player2->deactivate();
         playerSetup();
         if (gameState == GameState::EXIT || gameState == GameState::RESET) return;
+        board->flipFaceDown();
         switchPlayer();
+        gameState = GameState::PLAYER_SETUP;
         playerSetup();
         switchPlayer();
+        gameState = GameState::SWITCHING;
     }
 
     void Game::waitForInput() {
@@ -182,14 +203,33 @@ namespace stratego {
             case ClickActionType::BOARD:
             case ClickActionType::CONTAINER: {
                 // no first selection
-                if (true) {
-                    // TODO
-                    // Clicked on own piece
-                    // Create first selection
+                coord pos;
+                sptr<Piece> piece;
+                sptr<DisplayMatrix> matrix;
+                if (clickType == ClickActionType::BOARD) {
+                    matrix = board;
                 } else {
-                    // TODO
-                    // if Clicked area is in container or boards own area
-                    //      create second selection
+                    matrix = currentPlayer->getPieceContainer();
+                }
+                if (!selection1->isActive()) {
+                    pos = matrix->getGridCoordFromMousePosition(mouse);
+                    piece = matrix->getPiece(pos);
+                    if (piece->getPlayer() == currentPlayer) {
+                        selection1->activate(pos, matrix, piece);
+                        gameState = GameState::PLAYER_SETUP;
+                        return;
+                    }
+                } else {
+                    int minY = currentPlayer == player1 ? 6 : 0;
+                    int maxY = currentPlayer == player1 ? 9 : 3;
+                    pos = matrix->getGridCoordFromMousePosition(mouse);
+                    if (clickType == ClickActionType::BOARD) {
+                        if (pos.y < minY || pos.y > maxY) return;
+                    }
+                    piece = matrix->getPiece(pos);
+                    selection2->activate(pos, matrix, piece);
+                    gameState = GameState::PLAYER_SETUP;
+                    return;
                 }
                 gameState = GameState::PLAYER_SETUP;
             }
@@ -209,6 +249,7 @@ namespace stratego {
             }
             case ClickActionType::NEXT: {
                 gameState = GameState::PLAYER_TURN;
+                board->flipFaceUpForPlayer(currentPlayer);
             }
             case ClickActionType::BOARD: {
                 // piece belongs to me
@@ -260,6 +301,5 @@ namespace stratego {
             currentPlayer = player1;
         }
         currentPlayer->activate();
-
     }
 }

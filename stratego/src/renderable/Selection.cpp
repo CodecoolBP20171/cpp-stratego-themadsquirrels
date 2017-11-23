@@ -23,6 +23,7 @@ namespace stratego {
         y = pos.y;
         this->selectedMatrix = selectedMatrix;
         this->selectedPiece = selectedPiece;
+        setPosition(selectedPiece->getPosition());
         active = true;
     }
 
@@ -32,5 +33,20 @@ namespace stratego {
 
     bool Selection::isActive() const {
         return active;
+    }
+
+    void Selection::faceUp() {
+        selectedPiece->faceUp();
+    }
+
+    void Selection::switchWith(sptr<Selection>& other) {
+        if(selectedPiece != other->selectedPiece) {
+            auto piece1 = selectedMatrix->removePiece(getCoord());
+            auto piece2 = other->selectedMatrix->removePiece(other->getCoord());
+            selectedMatrix->addPiece(getCoord(), piece2);
+            other->selectedMatrix->addPiece(other->getCoord(), piece1);
+        }
+        deactivate();
+        other->deactivate();
     }
 }

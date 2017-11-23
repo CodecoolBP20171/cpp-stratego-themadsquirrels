@@ -57,7 +57,21 @@ namespace stratego {
             auto type = pieces[i]->getType();
             if (type != PieceType::EMPTY && type != PieceType::WATER) {
                 pieces[i]->gotoPlayer(pieces[i]);
-                pieces[i] = new Piece(PieceType::EMPTY);
+                pieces[i] = sptr<Piece>(new Piece(PieceType::EMPTY));
+            }
+        }
+    }
+
+    void Board::flipFaceDown() {
+        for(auto& piece : pieces){
+            piece->faceDown();
+        }
+    }
+
+    void Board::flipFaceUpForPlayer(sptr<Player>& player) {
+        for(auto& piece : pieces){
+            if(piece->getPlayer() == player){
+                piece->faceUp();
             }
         }
     }

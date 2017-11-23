@@ -9,6 +9,7 @@ namespace stratego {
     class DisplayMatrix : public Clickable {
     public:
         DisplayMatrix(sptr <Texture>& texture, int width, int height, ClickActionType type);
+        sptr<Piece>& getPiece(coord pos);
         void movePiece(coord from, coord to);
         void addPiece(coord dest, sptr<Piece>& piece);
         sptr<Piece> removePiece(coord from);
@@ -16,6 +17,8 @@ namespace stratego {
         coord getGridCoordFromMousePosition(coord mouse) const;
         coord linearToGridCoord(int idx) const;
         void initPiecePositions();
+        bool empty() const;
+
     protected:
         int width, height;
         int pieceSize;
