@@ -155,7 +155,8 @@ namespace stratego {
             }
             case ClickActionType::BOARD:
             case ClickActionType::CONTAINER: {
-                if (selection1 == nullptr) {
+                // no first selection
+                if (true) {
                     // TODO
                     // Clicked on own piece
                     // Create first selection
@@ -170,7 +171,48 @@ namespace stratego {
     }
 
     void Game::handleTurnClick() {
-
+        ClickActionType clickType = determineClickType();
+        switch (clickType) {
+            case ClickActionType::EXIT: {
+                gameState = GameState::EXIT;
+                return;
+            }
+            case ClickActionType::RESET: {
+                gameState = GameState::RESET;
+                return;
+            }
+            case ClickActionType::NEXT: {
+                gameState = GameState::PLAYER_TURN;
+            }
+            case ClickActionType::BOARD: {
+                // piece belongs to me
+                if (true) {
+                    // not flag or bomb
+                    if (true) {
+                        //save selection
+                    }
+                    gameState = GameState::PLAYER_TURN;
+                } else {
+                    // have first selection
+                    if (true) {
+                        // not water
+                        if (true) {
+                            // set second selection
+                            if (board.get()->isValidMove(selection1, selection2)) {
+                                gameState = GameState::SWITCHING;
+                            } else {
+                                // deactivate second selection
+                                gameState = GameState::PLAYER_TURN;
+                            }
+                        } else {
+                            gameState = GameState::PLAYER_TURN;
+                        }
+                    } else {
+                        gameState = GameState::PLAYER_TURN;
+                    }
+                }
+            }
+        }
     }
 
     ClickActionType Game::determineClickType() {
