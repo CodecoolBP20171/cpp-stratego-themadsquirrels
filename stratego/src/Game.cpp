@@ -69,7 +69,7 @@ namespace stratego {
     }
 
     void Game::checkForWin() {
-        // TODO: Implement win condition
+        if(currentPlayer->checkForFlag()) gameState = GameState::PLAYER_WIN;
     }
 
     void Game::playerSetup() {

@@ -13,6 +13,7 @@ namespace stratego {
         void activate();
         void deactivate();
         void render(GameState gs) override;
+        bool containsFlag() const;
     private:
         bool active;
         int findEmptyPos();

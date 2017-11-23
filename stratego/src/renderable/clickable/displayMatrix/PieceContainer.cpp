@@ -64,4 +64,11 @@ namespace stratego {
         for (int i = 0; i < 3; ++i) pieces.emplace_back(new Piece(PieceType::MAJOR, player));
         initPiecePositions();
     }
+
+    bool PieceContainer::containsFlag() const {
+        for(auto& piece : pieces){
+            if(piece->getType() == PieceType::FLAG) return true;
+        }
+        return false;
+    }
 }

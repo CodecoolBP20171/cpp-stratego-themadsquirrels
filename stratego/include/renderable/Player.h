@@ -16,6 +16,7 @@ namespace stratego {
         void activate();
         void deactivate();
         void render(GameState gs) override;
+        bool checkForFlag() const;
 
     private:
         std::string name;

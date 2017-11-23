@@ -1,6 +1,5 @@
 #include <renderable/Player.h>
 #include <Resources.h>
-#include <caca_conio.h>
 #include <iostream>
 
 namespace stratego {
@@ -39,5 +38,9 @@ namespace stratego {
 
     void Player::initContainer(sptr<Player>& player) {
         unusedPieces->initPieces(player);
+    }
+
+    bool Player::checkForFlag() const {
+        return unusedPieces->containsFlag();
     }
 }
