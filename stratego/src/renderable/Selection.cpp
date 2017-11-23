@@ -2,15 +2,11 @@
 #include <Resources.h>
 
 namespace stratego {
-    Selection::Selection(int x, int y, sptr<DisplayMatrix> &selectedMatrix, sptr<Piece> &selectedPiece)
-            : Renderable(Resources::getInstance()->getSelection()),
-              selectedMatrix(selectedMatrix),
-              selectedPiece(selectedPiece),
-              x(x),
-              y(y) {}
+    Selection::Selection()
+            : Renderable(Resources::getInstance()->getSelection()) {}
 
     void Selection::render(GameState gs) {
-        texture->render(&rect);
+        if (active) texture->render(&rect);
     }
 
     coord Selection::getCoord() const {
@@ -19,5 +15,21 @@ namespace stratego {
 
     PieceType Selection::getPieceType() const {
         return selectedPiece->getType();
+    }
+
+    void Selection::activate(coord pos, sptr<DisplayMatrix>& selectedMatrix, sptr<Piece>& selectedPiece) {
+        x = pos.x;
+        y = pos.y;
+        this->selectedMatrix = selectedMatrix;
+        this->selectedPiece = selectedPiece;
+        active = true;
+    }
+
+    void Selection::deactivate() {
+        active = false;
+    }
+
+    bool Selection::isActive() const {
+        return active;
     }
 }

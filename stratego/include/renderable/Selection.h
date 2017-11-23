@@ -9,12 +9,16 @@
 namespace stratego {
     class Selection : public Renderable {
     public:
-        Selection(int x, int y, sptr<DisplayMatrix>& selectedMatrix, sptr<Piece>& selectedPiece);
+        Selection();
         void render(GameState gs) override;
         coord getCoord() const;
         PieceType getPieceType() const;
+        void activate(coord pos, sptr<DisplayMatrix>& selectedMatrix, sptr<Piece>& selectedPiece);
+        void deactivate();
+        bool isActive() const;
     private:
         int x, y;
+        bool active;
         sptr<DisplayMatrix> selectedMatrix;
         sptr<Piece> selectedPiece;
     };
