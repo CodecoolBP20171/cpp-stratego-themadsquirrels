@@ -51,4 +51,14 @@ namespace stratego {
         }
         return false;
     }
+
+    void Board::resetPieces() {
+        for (int i = 0; i < pieces.size(); ++i) {
+            auto type = pieces[i]->getType();
+            if (type != PieceType::EMPTY && type != PieceType::WATER) {
+                pieces[i]->gotoPlayer(pieces[i]);
+                pieces[i] = new Piece(PieceType::EMPTY);
+            }
+        }
+    }
 }

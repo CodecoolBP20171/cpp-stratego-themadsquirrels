@@ -119,7 +119,7 @@ namespace stratego {
     }
 
     void Game::reset() {
-        // TODO: Move pieces from board to containers
+        board->resetPieces();
         gameState = GameState::PLAYER_SETUP;
         currentPlayer = player1;
         currentPlayer->activate();

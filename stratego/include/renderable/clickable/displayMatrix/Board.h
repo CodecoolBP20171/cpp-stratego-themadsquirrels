@@ -9,6 +9,7 @@ namespace stratego {
     public:
         Board();
         bool isValidMove(sptr<Selection>& s1, sptr<Selection>& s2);
+        void resetPieces();
     };
 }
 

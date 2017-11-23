@@ -17,6 +17,7 @@ namespace stratego {
         const PieceType getType() const;
         void faceUp();
         void faceDown();
+        void gotoPlayer(sptr <Piece>& self);
 
     private:
         const PieceType type;

@@ -39,4 +39,11 @@ namespace stratego {
     void Piece::faceDown() {
         _faceUp = false;
     }
+
+    void Piece::gotoPlayer(sptr <Piece>& self) {
+        auto pl = player.lock();
+        if(pl){
+            pl->getPieceContainer()->addPiece(self);
+        } else throw std::bad_weak_ptr();
+    }
 }
