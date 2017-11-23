@@ -47,6 +47,7 @@ namespace stratego {
         void handleTurnClick();
         void waitForInput();
         ClickActionType determineClickType();
+        void switchPlayer();
     };
 }
 

@@ -9,7 +9,8 @@ namespace stratego {
             : Renderable(Resources::getInstance()->getPlayerIcon(pc)),
               name(name),
               pc(pc),
-              unusedPieces(new PieceContainer()) {}
+              unusedPieces(new PieceContainer()),
+              active(false) {}
 
     sptr<PieceContainer>& Player::getPieceContainer() {
         return unusedPieces;
@@ -21,10 +22,12 @@ namespace stratego {
 
     void Player::activate() {
         active = true;
+        unusedPieces->activate();
     }
 
     void Player::deactivate() {
         active = false;
+        unusedPieces->deactivate();
     }
 
     void Player::render(GameState gs) {

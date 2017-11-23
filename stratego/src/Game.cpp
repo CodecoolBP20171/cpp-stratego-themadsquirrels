@@ -19,6 +19,8 @@ namespace stratego {
         player2->initContainer(player2);
         player1->setPosition(640, 64);
         player2->setPosition(640, 64);
+        player1->getPieceContainer()->setPosition(640, 128);
+        player2->getPieceContainer()->setPosition(640, 128);
         sptr<Menu> menu(new Menu({640, 0}));
         renderObjects.emplace_back(menu);
         clickObjects.emplace_back(menu);
@@ -119,11 +121,13 @@ namespace stratego {
         // TODO: Move pieces from board to containers
         gameState = GameState::PLAYER_SETUP;
         currentPlayer = player1;
+        currentPlayer->activate();
+        player2->deactivate();
         playerSetup();
-        if (gameState == GameState::EXIT) return;
-        currentPlayer = player2;
+        if (gameState == GameState::EXIT || gameState == GameState::RESET) return;
+        switchPlayer();
         playerSetup();
-        currentPlayer = player1;
+        switchPlayer();
     }
 
     void Game::waitForInput() {
@@ -245,5 +249,16 @@ namespace stratego {
             }
         }
         return ClickActionType::OUTSIDE;
+    }
+
+    void Game::switchPlayer() {
+        currentPlayer->deactivate();
+        if (currentPlayer == player1) {
+            currentPlayer = player2;
+        } else {
+            currentPlayer = player1;
+        }
+        currentPlayer->activate();
+
     }
 }

@@ -6,7 +6,8 @@ namespace stratego {
     PieceContainer::PieceContainer()
             : DisplayMatrix(Resources::getInstance()->getPieceContainerBackground(),
                             5, 8,
-                            ClickActionType::CONTAINER) {}
+                            ClickActionType::CONTAINER),
+              active(false) {}
 
     void PieceContainer::addPiece(sptr<Piece>& piece) {
         int idx = findEmptyPos();
