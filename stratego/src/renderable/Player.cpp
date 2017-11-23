@@ -17,4 +17,19 @@ namespace stratego {
     PlayerColor Player::getPlayerColor() const {
         return pc;
     }
+
+    void Player::activate() {
+        active = true;
+    }
+
+    void Player::deactivate() {
+        active = false;
+    }
+
+    void Player::render(GameState gs) {
+        if(active){
+            texture->render(&rect);
+            unusedPieces->render(gs);
+        }
+    }
 }

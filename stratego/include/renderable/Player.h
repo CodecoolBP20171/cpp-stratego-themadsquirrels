@@ -12,9 +12,13 @@ namespace stratego {
         Player(const std::string& name, PlayerColor pc);
         sptr<PieceContainer>& getPieceContainer();
         PlayerColor getPlayerColor() const;
+        void activate();
+        void deactivate();
+        void render(GameState gs) override;
 
     private:
         std::string name;
+        bool active;
         sptr<PieceContainer> unusedPieces;
         PlayerColor pc;
     };
