@@ -8,6 +8,8 @@
 #include <vector>
 #include "strategoTypes.h"
 #include "GameState.h"
+#include "Resources.h"
+#include "PlayerMove.h"
 #include <renderable/Renderable.h>
 #include <renderable/Player.h>
 #include <renderable/clickable/Clickable.h>
@@ -22,6 +24,9 @@ namespace stratego {
         GameState run();
 
     private:
+        // we want 60fps what is 1000 ms / 60 = 16.6 frame per seconds so timestep is 16
+        static const Uint32 timestep = 16;
+
         GameState gameState;
         sptr<Player> player1;
         sptr<Player> player2;
@@ -31,11 +36,10 @@ namespace stratego {
         std::vector<sptr<Clickable>> clickObjects;
         sptr<Selection> selection1;
         sptr<Selection> selection2;
-        int mouseX;
-        int mouseY;
+        coord mouse;
+        PlayerMove lastAction;
 
         void checkForWin();
-        void loadResources();
         void playerSetup();
         void playerTurn();
         void render();

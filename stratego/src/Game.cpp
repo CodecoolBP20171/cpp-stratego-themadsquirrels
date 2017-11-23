@@ -7,7 +7,6 @@
 namespace stratego {
 
     Game::Game() {
-        loadResources();
         // TODO: init fields
         // create menu (buttons)
         // create board
@@ -49,10 +48,6 @@ namespace stratego {
 
     void Game::checkForWin() {
         // TODO: Implement win condition
-    }
-
-    void Game::loadResources() {
-        // TODO: load resources here
     }
 
     void Game::playerSetup() {
@@ -113,19 +108,32 @@ namespace stratego {
     }
 
     void Game::waitForInput() {
+        Uint32 timePassed;
         SDL_Event e;
-        bool returnToGameFlow = false;
-        while (!returnToGameFlow) {
+        bool resume = false;
+        while (!resume) {
+            timePassed = SDL_GetTicks();
             while (SDL_PollEvent(&e) != 0) {
                 if (e.type == SDL_QUIT) {
                     gameState = GameState::EXIT;
-                    returnToGameFlow = true;
+                    resume = true;
                 }
                 if (e.type == SDL_MOUSEBUTTONUP) {
-                    SDL_GetMouseState(&mouseX, &mouseY);
-                    returnToGameFlow = true;
+                    SDL_GetMouseState(&mouse.x, &mouse.y);
+                    resume = true;
                 }
             }
+            SDL_RenderClear(Resources::getInstance()->getRenderer());
+            render();
+            // wait until the time declared in timestep passes
+            while(timePassed + timestep > SDL_GetTicks()){
+                SDL_Delay(0);
+            }
         }
+    }
+
+    void Game::render() {
+        // Update the screen - last line
+        SDL_RenderPresent(Resources::getInstance()->getRenderer());
     }
 }
