@@ -26,15 +26,15 @@ namespace stratego {
     void Resources::loadTextures() {
         boardBackground = sptr<Texture>(new Texture("assets/board.png"));
         menuBackground = sptr<Texture>(new Texture("assets/menu.png"));
-        playerIcon[PlayerColor::BLUE] = sptr<Texture>(new Texture("asets/player_blue.png"));
-        playerIcon[PlayerColor::RED]  = sptr<Texture>(new Texture("asets/player_red.png"));
+        playerIcon[PlayerColor::BLUE] = sptr<Texture>(new Texture("assets/player_blue.png"));
+        playerIcon[PlayerColor::RED]  = sptr<Texture>(new Texture("assets/player_red.png"));
         pieceContainerBackground = sptr<Texture>(new Texture("assets/piece_container.png"));
         selection = sptr<Texture>(new Texture("assets/selection.png"));
         backFaces[PlayerColor::BLUE] = sptr<Texture>(new Texture("assets/piece_back_blue.png"));
         backFaces[PlayerColor::RED] = sptr<Texture>(new Texture("assets/piece_back_red.png"));
         for (int i = 0; i < 12; ++i) {
-            blueFrontFaces[static_cast<PieceType>(i)] = sptr<Texture>(new Texture("piece_" + std::to_string(i) + "_blue.png"));
-            redFrontFaces[static_cast<PieceType>(i)] = sptr<Texture>(new Texture("piece_" + std::to_string(i) + "_red.png"));
+            blueFrontFaces[static_cast<PieceType>(i)] = sptr<Texture>(new Texture("assets/piece_" + std::to_string(i) + "_blue.png"));
+            redFrontFaces[static_cast<PieceType>(i)] = sptr<Texture>(new Texture("assets/piece_" + std::to_string(i) + "_red.png"));
         }
         emptyPiece = sptr<Texture>(new Texture("assets/piece_empty.png"));
         icons.emplace_back(new Texture("assets/icon_next.png"));

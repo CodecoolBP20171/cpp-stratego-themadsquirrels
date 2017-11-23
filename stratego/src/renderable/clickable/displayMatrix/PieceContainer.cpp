@@ -13,7 +13,7 @@ namespace stratego {
         int idx = findEmptyPos();
         auto pos = linearToGridCoord(idx);
         pieces[idx] = piece;
-        pieces[idx]->setPosition(pos.x, pos.y);
+        pieces[idx]->setPosition(rect.x + pos.x * pieceSize, rect.y + pos.y * pieceSize);
     }
 
     int PieceContainer::findEmptyPos() {
@@ -62,5 +62,6 @@ namespace stratego {
             pieces.emplace_back(new Piece(PieceType::CAPTAIN, player));
         }
         for (int i = 0; i < 3; ++i) pieces.emplace_back(new Piece(PieceType::MAJOR, player));
+        initPiecePositions();
     }
 }

@@ -15,6 +15,7 @@ namespace stratego {
         void render(GameState gs) override;
         coord getGridCoordFromMousePosition(coord mouse) const;
         coord linearToGridCoord(int idx) const;
+        void initPiecePositions();
     protected:
         int width, height;
         int pieceSize;

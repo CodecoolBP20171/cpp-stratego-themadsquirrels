@@ -15,12 +15,13 @@ namespace stratego {
             selection1(new Selection()),
             selection2(new Selection()) {
         board->setPosition(0, 0);
+        board->initPiecePositions();
+        player1->getPieceContainer()->setPosition(640, 128);
+        player2->getPieceContainer()->setPosition(640, 128);
         player1->initContainer(player1);
         player2->initContainer(player2);
         player1->setPosition(640, 64);
         player2->setPosition(640, 64);
-        player1->getPieceContainer()->setPosition(640, 128);
-        player2->getPieceContainer()->setPosition(640, 128);
         sptr<Menu> menu(new Menu({640, 0}));
         renderObjects.emplace_back(menu);
         clickObjects.emplace_back(menu);

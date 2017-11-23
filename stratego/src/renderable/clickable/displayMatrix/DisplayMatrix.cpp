@@ -7,7 +7,7 @@ namespace stratego {
             : Clickable(texture, type),
               width(width),
               height(height),
-              pieceSize(texture->getDimensions().w) {}
+              pieceSize(64) {}
 
     void DisplayMatrix::movePiece(coord from, coord to) {
         int fromIdx = gridCoordToLinear(from);
@@ -50,5 +50,12 @@ namespace stratego {
 
     coord DisplayMatrix::linearToGridCoord(int idx) const {
         return {idx % width, idx / width};
+    }
+
+    void DisplayMatrix::initPiecePositions() {
+        for (int i = 0; i < pieces.size(); ++i) {
+            auto pos = linearToGridCoord(i);
+            pieces[i]->setPosition(rect.x + pos.x * pieceSize, rect.y + pos.y * pieceSize);
+        }
     }
 }
