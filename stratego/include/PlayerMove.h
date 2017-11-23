@@ -15,10 +15,7 @@ using sptr = std::shared_ptr;
 namespace stratego {
     class PlayerMove {
     public:
-        PlayerMove(sptr<Player>& player, sptr<Selection>& first, sptr<Selection>& second) :
-                player(player),
-                firstSelection(first),
-                secondSelection(second) {}
+        PlayerMove(sptr<Player> player, sptr<Selection> first, sptr<Selection> second);
 
         void execute();
 

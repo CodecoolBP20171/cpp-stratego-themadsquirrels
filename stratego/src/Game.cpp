@@ -6,7 +6,8 @@
 
 namespace stratego {
 
-    Game::Game() {
+    Game::Game() :
+            lastAction(nullptr, nullptr, nullptr) {
         // TODO: init fields
         // create menu (buttons)
         // create board

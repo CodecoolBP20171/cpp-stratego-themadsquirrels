@@ -3,3 +3,11 @@
 //
 
 #include "PlayerMove.h"
+
+namespace stratego {
+
+    PlayerMove::PlayerMove(sptr<Player> player, sptr<Selection> first, sptr<Selection> second) :
+            player(player),
+            firstSelection(first),
+            secondSelection(second) {}
+}
