@@ -8,7 +8,7 @@ namespace stratego {
     class Board : public DisplayMatrix {
     public:
         Board();
-        bool isValidMove(sptr<const Selection>& s1, sptr<const Selection>& s2);
+        bool isValidMove(sptr<Selection>& s1, sptr<Selection>& s2);
     };
 }
 

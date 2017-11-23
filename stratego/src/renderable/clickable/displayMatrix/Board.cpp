@@ -21,7 +21,7 @@ namespace stratego {
         pieces[gridCoordToLinear({7, 6})] = sptr<Piece>(new Piece(PieceType::WATER, noplayer));
     }
 
-    bool Board::isValidMove(sptr<const Selection> &s1, sptr<const Selection> &s2) {
+    bool Board::isValidMove(sptr<Selection>& s1, sptr<Selection>& s2) {
         // TODO: refactor this
         auto s1pos = s1->getCoord();
         auto s2pos = s2->getCoord();

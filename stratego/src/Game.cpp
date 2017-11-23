@@ -2,16 +2,30 @@
 // Created by meszi on 2017.11.21..
 //
 
+#include <renderable/clickable/Menu.h>
 #include "Game.h"
 
 namespace stratego {
 
     Game::Game() :
-            lastAction(nullptr, nullptr, nullptr) {
-        // TODO: init fields
-        // create menu (buttons)
-        // create board
-        // create players (piece containers, pieces)
+            lastAction(nullptr, nullptr, nullptr),
+            board(new Board()),
+            player1(new Player("P1", PlayerColor::BLUE)),
+            player2(new Player("P2", PlayerColor::RED)) {
+        board->setPosition(0, 0);
+        player1->setPosition(640, 64);
+        player2->setPosition(640, 64);
+        sptr<Menu> menu(new Menu({640, 0}));
+        renderObjects.emplace_back(menu);
+        clickObjects.emplace_back(menu);
+        renderObjects.emplace_back(board);
+        clickObjects.emplace_back(board);
+        renderObjects.emplace_back(player1);
+        renderObjects.emplace_back(player2);
+        clickObjects.emplace_back(player1->getPieceContainer());
+        clickObjects.emplace_back(player2->getPieceContainer());
+        renderObjects.emplace_back(selection1);
+        renderObjects.emplace_back(selection2);
     }
 
     GameState Game::run() {
@@ -19,7 +33,7 @@ namespace stratego {
         bool quit = false;
         while (!quit) {
             render();
-            switch(gameState) {
+            switch (gameState) {
                 case GameState::PLAYER_TURN: {
                     playerTurn();
                     // TODO: Complete flowchart implementation
@@ -127,7 +141,7 @@ namespace stratego {
             SDL_RenderClear(Resources::getInstance()->getRenderer());
             render();
             // wait until the time declared in timestep passes
-            while(timePassed + timestep > SDL_GetTicks()){
+            while (timePassed + timestep > SDL_GetTicks()) {
                 SDL_Delay(0);
             }
         }

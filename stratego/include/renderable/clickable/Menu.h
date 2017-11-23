@@ -6,11 +6,10 @@
 #include "Clickable.h"
 
 namespace stratego {
-    class Menu : Clickable {
+    class Menu : public Clickable {
     public:
         Menu(coord pos);
         void render(GameState gs) override;
-    private:
         const ClickActionType evaluateClick(const coord& mouse) const override;
     private:
         const int BUTTON_OFFSET = 128;
