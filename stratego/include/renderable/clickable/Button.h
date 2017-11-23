@@ -7,6 +7,7 @@ namespace stratego {
     class Button : public Clickable {
     public:
         Button(sptr <Texture>& texture, ClickActionType type);
+        void render(GameState gs) override;
     };
 }
 

@@ -12,6 +12,7 @@ namespace stratego {
         explicit Renderable(sptr<Texture>& texture);
         virtual void render(GameState gs) = 0;
         void setPosition(int x, int y);
+        const coord getDimensions() const;
     protected:
         const sptr<Texture> texture;
         SDL_Rect rect;

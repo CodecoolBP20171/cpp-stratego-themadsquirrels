@@ -74,8 +74,8 @@ namespace stratego {
         return renderer.get();
     }
 
-    sptr<Texture>& Resources::getPlayerBackground() {
-        return playerBackground;
+    sptr <Texture>& Resources::getPlayerIcon(PlayerColor pc) {
+        return playerIcon[pc];
     }
 }
 

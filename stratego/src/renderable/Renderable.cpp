@@ -9,4 +9,8 @@ namespace stratego {
         rect.x = x;
         rect.y = y;
     }
+
+    const coord Renderable::getDimensions() const {
+        return {rect.w, rect.h};
+    }
 }

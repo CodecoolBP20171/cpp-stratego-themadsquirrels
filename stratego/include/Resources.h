@@ -26,7 +26,7 @@ namespace stratego {
         sptr<Texture>& getIcon(size_t index);
         sptr<Texture>& getPieceContainerBackground();
         sptr<Texture>& getSelection();
-        sptr<Texture>& getPlayerBackground();
+        sptr <Texture>& getPlayerIcon(PlayerColor pc);
 
         SDL_Renderer* getRenderer();
     private:
