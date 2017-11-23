@@ -109,7 +109,6 @@ namespace stratego {
                         return;
                     } else {
                         placePieces(currentPlayer);
-                        return;
                     }
                     gameState = GameState::PLAYER_SETUP;
                     break;
