@@ -25,7 +25,7 @@ namespace stratego {
         auto s2pos = s2->getCoord();
         if (s1pos.x == s2pos.x) {
             if (abs(s1pos.y - s2pos.y) == 1) return true;
-            if (s1->getPieceType() == PieceType::SPY) {
+            if (s1->getPieceType() == PieceType::SCOUT) {
                 auto from = std::min(s1pos.y, s2pos.y);
                 auto to = std::max(s1pos.y, s2pos.y);
                 for (int i = from + 1; i < to; ++i) {
@@ -37,7 +37,7 @@ namespace stratego {
             }
         } else if (s1pos.y == s2pos.y) {
             if (abs(s1pos.x - s2pos.x) == 1) return true;
-            if (s1->getPieceType() == PieceType::SPY) {
+            if (s1->getPieceType() == PieceType::SCOUT) {
                 auto from = std::min(s1pos.x, s2pos.x);
                 auto to = std::max(s1pos.x, s2pos.x);
                 for (int i = from + 1; i < to; ++i) {

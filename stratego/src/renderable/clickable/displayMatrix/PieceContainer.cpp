@@ -31,7 +31,7 @@ namespace stratego {
         for (int row = 0; row < height; ++row) {
             for (int col = 0; col < width; ++col) {
                 int idx = planarCoordToLinear({col, row});
-                if (!pieces[idx]) {
+                if (pieces[idx]->getType() == PieceType::EMPTY) {
                     return idx;
                 }
             }
