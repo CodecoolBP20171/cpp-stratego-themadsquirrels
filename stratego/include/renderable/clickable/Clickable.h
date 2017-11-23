@@ -8,6 +8,8 @@ namespace stratego {
     class Clickable : public Renderable{
     public:
         Clickable(sptr<Texture>& texture, ClickActionType type);
+
+        virtual const ClickActionType evaluateClick(const coord &mouse) const;
     protected:
         ClickActionType type;
     };

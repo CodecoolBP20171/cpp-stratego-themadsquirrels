@@ -4,7 +4,9 @@
 namespace stratego {
 
     PieceContainer::PieceContainer(sptr<Player> player)
-            : DisplayMatrix(Resources::getInstance()->getPieceContainerBackground(), 5, 8) {
+            : DisplayMatrix(Resources::getInstance()->getPieceContainerBackground(),
+                            5, 8,
+                            ClickActionType::CONTAINER) {
         pieces.reserve(40);
         pieces.emplace_back(new Piece(PieceType::FLAG, player));
         pieces.emplace_back(new Piece(PieceType::SPY, player));
@@ -23,14 +25,17 @@ namespace stratego {
         for (int i = 0; i < 3; ++i) pieces.emplace_back(new Piece(PieceType::MAJOR, player));
     }
 
-    void PieceContainer::addPiece(sptr<Piece> &piece) {
-        pieces[findEmptyPos()] = piece;
+    void PieceContainer::addPiece(sptr<Piece>& piece) {
+        int idx = findEmptyPos();
+        auto pos = linearToGridCoord(idx);
+        pieces[idx] = piece;
+        pieces[idx]->setPosition(pos.x, pos.y);
     }
 
     int PieceContainer::findEmptyPos() {
         for (int row = 0; row < height; ++row) {
             for (int col = 0; col < width; ++col) {
-                int idx = planarCoordToLinear({col, row});
+                int idx = gridCoordToLinear({col, row});
                 if (pieces[idx]->getType() == PieceType::EMPTY) {
                     return idx;
                 }

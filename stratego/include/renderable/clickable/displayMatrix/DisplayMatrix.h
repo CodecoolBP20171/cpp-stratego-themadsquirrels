@@ -8,16 +8,18 @@
 namespace stratego {
     class DisplayMatrix : public Clickable {
     public:
-        DisplayMatrix(sptr<Texture>& texture, int width, int height);
+        DisplayMatrix(sptr <Texture>& texture, int width, int height, ClickActionType type);
         void movePiece(coord from, coord to);
         void addPiece(coord dest, sptr<Piece>& piece);
         sptr<Piece> removePiece(coord from);
         void render(GameState gs) override;
+        coord getGridCoordFromMousePosition(coord mouse) const;
+        coord linearToGridCoord(int idx) const;
     protected:
         int width, height;
         int pieceSize;
         std::vector<sptr<Piece>> pieces;
-        int planarCoordToLinear(coord pos);
+        int gridCoordToLinear(coord pos);
     };
 }
 

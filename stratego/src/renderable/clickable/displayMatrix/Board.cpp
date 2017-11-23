@@ -4,19 +4,21 @@
 namespace stratego {
 
     Board::Board()
-            : DisplayMatrix(Resources::getInstance()->getBoardBackground(), 10, 10) {
+            : DisplayMatrix(Resources::getInstance()->getBoardBackground(),
+                            10, 10,
+                            ClickActionType::BOARD) {
         pieces.reserve(100);
         sptr<Player> noplayer = nullptr;
         for (int i = 0; i < 100; ++i) pieces.emplace_back(new Piece(PieceType::EMPTY, noplayer));
-        pieces[planarCoordToLinear({2, 5})] = sptr<Piece>(new Piece(PieceType::WATER, noplayer));
-        pieces[planarCoordToLinear({2, 6})] = sptr<Piece>(new Piece(PieceType::WATER, noplayer));
-        pieces[planarCoordToLinear({3, 5})] = sptr<Piece>(new Piece(PieceType::WATER, noplayer));
-        pieces[planarCoordToLinear({3, 6})] = sptr<Piece>(new Piece(PieceType::WATER, noplayer));
+        pieces[gridCoordToLinear({2, 5})] = sptr<Piece>(new Piece(PieceType::WATER, noplayer));
+        pieces[gridCoordToLinear({2, 6})] = sptr<Piece>(new Piece(PieceType::WATER, noplayer));
+        pieces[gridCoordToLinear({3, 5})] = sptr<Piece>(new Piece(PieceType::WATER, noplayer));
+        pieces[gridCoordToLinear({3, 6})] = sptr<Piece>(new Piece(PieceType::WATER, noplayer));
 
-        pieces[planarCoordToLinear({6, 5})] = sptr<Piece>(new Piece(PieceType::WATER, noplayer));
-        pieces[planarCoordToLinear({6, 6})] = sptr<Piece>(new Piece(PieceType::WATER, noplayer));
-        pieces[planarCoordToLinear({7, 5})] = sptr<Piece>(new Piece(PieceType::WATER, noplayer));
-        pieces[planarCoordToLinear({7, 6})] = sptr<Piece>(new Piece(PieceType::WATER, noplayer));
+        pieces[gridCoordToLinear({6, 5})] = sptr<Piece>(new Piece(PieceType::WATER, noplayer));
+        pieces[gridCoordToLinear({6, 6})] = sptr<Piece>(new Piece(PieceType::WATER, noplayer));
+        pieces[gridCoordToLinear({7, 5})] = sptr<Piece>(new Piece(PieceType::WATER, noplayer));
+        pieces[gridCoordToLinear({7, 6})] = sptr<Piece>(new Piece(PieceType::WATER, noplayer));
     }
 
     bool Board::isValidMove(sptr<const Selection> &s1, sptr<const Selection> &s2) {
@@ -29,7 +31,7 @@ namespace stratego {
                 auto from = std::min(s1pos.y, s2pos.y);
                 auto to = std::max(s1pos.y, s2pos.y);
                 for (int i = from + 1; i < to; ++i) {
-                    if (pieces[planarCoordToLinear({s1pos.x, i})]->getType() != PieceType::EMPTY) {
+                    if (pieces[gridCoordToLinear({s1pos.x, i})]->getType() != PieceType::EMPTY) {
                         return false;
                     }
                 }
@@ -41,7 +43,7 @@ namespace stratego {
                 auto from = std::min(s1pos.x, s2pos.x);
                 auto to = std::max(s1pos.x, s2pos.x);
                 for (int i = from + 1; i < to; ++i) {
-                    if (pieces[planarCoordToLinear({i, s1pos.y})]->getType() != PieceType::EMPTY) {
+                    if (pieces[gridCoordToLinear({i, s1pos.y})]->getType() != PieceType::EMPTY) {
                         return false;
                     }
                 }

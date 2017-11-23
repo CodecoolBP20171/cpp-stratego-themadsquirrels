@@ -2,15 +2,19 @@
 #define STRATEGO_MENU_H
 
 #include <vector>
+#include <renderable/clickable/Button.h>
 #include "Clickable.h"
 
 namespace stratego {
     class Menu : Clickable {
     public:
-        Menu(sptr<Texture>& texture, sptr<SDL_Renderer>& renderer);
+        Menu(coord pos);
         void render(GameState gs) override;
     private:
-        std::vector<sptr<Texture>> buttons;
+        const ClickActionType evaluateClick(const coord& mouse) const override;
+    private:
+        const int BUTTON_OFFSET = 128;
+        std::vector<sptr<Button>> buttons;
     };
 }
 

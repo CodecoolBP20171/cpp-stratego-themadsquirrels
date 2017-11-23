@@ -7,11 +7,11 @@ namespace stratego {
             : Renderable(Resources::getInstance()->getFrontFace(player->getPlayerColor(),type)),
               type(type),
               player(player),
-              faceUp(true),
+              _faceUp(true),
               backTexture(Resources::getInstance()->getBackFace(player->getPlayerColor())) {}
 
     void Piece::render(GameState gs) {
-        if(faceUp) texture->render(&rect);
+        if(_faceUp) texture->render(&rect);
         else backTexture->render(&rect);
     }
 
@@ -23,5 +23,13 @@ namespace stratego {
 
     const PieceType Piece::getType() const {
         return type;
+    }
+
+    void Piece::faceUp() {
+        _faceUp = true;
+    }
+
+    void Piece::faceDown() {
+        _faceUp = false;
     }
 }
