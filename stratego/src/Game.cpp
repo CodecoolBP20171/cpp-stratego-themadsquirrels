@@ -139,7 +139,34 @@ namespace stratego {
     }
 
     void Game::handleSetupClick() {
-
+        ClickActionType clickType = determineClickType();
+        switch (clickType) {
+            case ClickActionType::EXIT: {
+                gameState = GameState::EXIT;
+                return;
+            }
+            case ClickActionType::RESET: {
+                gameState = GameState::RESET;
+                return;
+            }
+            case ClickActionType::NEXT : {
+                gameState = GameState::SWITCHING;
+                return;
+            }
+            case ClickActionType::BOARD:
+            case ClickActionType::CONTAINER: {
+                if (selection1 == nullptr) {
+                    // TODO
+                    // Clicked on own piece
+                    // Create first selection
+                } else {
+                    // TODO
+                    // if Clicked area is in container or boards own area
+                    //      create second selection
+                }
+                gameState = GameState::PLAYER_SETUP;
+            }
+        }
     }
 
     void Game::handleTurnClick() {
