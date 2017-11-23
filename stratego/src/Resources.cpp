@@ -104,8 +104,8 @@ namespace stratego {
         for (auto& icon : icons) {
             icon.reset();
         }
-        renderer.release();
-        window.release();
+        renderer.reset();
+        window.reset();
     }
 }
 
