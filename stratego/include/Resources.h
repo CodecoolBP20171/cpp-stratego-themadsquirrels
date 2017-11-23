@@ -14,10 +14,11 @@
 
 namespace stratego {
     class Resources {
-        static sptr<Resources> instance;
     public:
 
         static sptr<Resources>& getInstance();
+        static void releaseResources();
+
         sptr<Texture>& getFrontFace(PlayerColor pc, PieceType pt);
         sptr<Texture>& getBackFace(PlayerColor pc);
         sptr<Texture>& getBoardBackground();
@@ -31,8 +32,9 @@ namespace stratego {
 
         SDL_Renderer* getRenderer();
     private:
+        static sptr<Resources> instance;
 
-        // TODO: Add textures for new game screen and player name
+        // TODO: Add textures for new game screen
         std::unique_ptr<SDL_Window, sdl_deleter> window;
         std::unique_ptr<SDL_Renderer, sdl_deleter> renderer;
         sptr<Texture> boardBackground;
@@ -45,6 +47,7 @@ namespace stratego {
         std::map<PieceType, sptr<Texture>> blueFrontFaces;
         std::map<PieceType, sptr<Texture>> redFrontFaces;
         std::vector<sptr<Texture>> icons;
+        void release();
 
         Resources();
         void loadTextures();

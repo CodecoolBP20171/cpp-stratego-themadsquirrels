@@ -82,5 +82,30 @@ namespace stratego {
     sptr<Texture>& Resources::getEmptyPiece() {
         return emptyPiece;
     }
+
+    void Resources::releaseResources() {
+        if (instance) instance->release();
+    }
+
+    void Resources::release() {
+        boardBackground.reset();
+        menuBackground.reset();
+        playerIcon[PlayerColor::BLUE].reset();
+        playerIcon[PlayerColor::RED].reset();
+        pieceContainerBackground.reset();
+        selection.reset();
+        backFaces[PlayerColor::BLUE].reset();
+        backFaces[PlayerColor::RED].reset();
+        for (int i = 0; i < 12; ++i) {
+            blueFrontFaces[static_cast<PieceType>(i)].reset();
+            redFrontFaces[static_cast<PieceType>(i)].reset();
+        }
+        emptyPiece.reset();
+        for (auto& icon : icons) {
+            icon.reset();
+        }
+        renderer.release();
+        window.release();
+    }
 }
 

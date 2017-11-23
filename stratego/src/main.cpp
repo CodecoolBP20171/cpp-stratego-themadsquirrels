@@ -4,6 +4,9 @@
 using namespace stratego;
 
 int main(int argc, char* argv[]) {
+    SDL_Init(SDL_INIT_VIDEO);
+    IMG_Init(IMG_INIT_PNG);
+
     Game game;
 
     bool quit = false;
@@ -33,6 +36,10 @@ int main(int argc, char* argv[]) {
             }
         }
     }
+
+    Resources::releaseResources();
+    IMG_Quit();
+    SDL_Quit();
 
     return 0;
 }
