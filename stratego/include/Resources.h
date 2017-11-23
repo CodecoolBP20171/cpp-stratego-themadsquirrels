@@ -38,7 +38,7 @@ namespace stratego {
         sptr<Texture> menuBackground;
         sptr<Texture> pieceContainerBackground;
         sptr<Texture> selection;
-        sptr<Texture> playerBackground;
+        std::map<PlayerColor, sptr<Texture>> playerIcon;
         std::map<PlayerColor, sptr<Texture>> backFaces;
         std::map<PieceType, sptr<Texture>> blueFrontFaces;
         std::map<PieceType, sptr<Texture>> redFrontFaces;

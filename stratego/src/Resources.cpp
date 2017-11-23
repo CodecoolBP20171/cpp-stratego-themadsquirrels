@@ -26,9 +26,10 @@ namespace stratego {
     void Resources::loadTextures() {
         boardBackground = sptr<Texture>(new Texture("assets/board.png"));
         menuBackground = sptr<Texture>(new Texture("assets/menu.png"));
+        playerIcon[PlayerColor::BLUE] = sptr<Texture>(new Texture("asets/player_blue.png"));
+        playerIcon[PlayerColor::RED]  = sptr<Texture>(new Texture("asets/player_red.png"));
         pieceContainerBackground = sptr<Texture>(new Texture("assets/piece_container.png"));
-        selection = sptr<Texture>(new Texture("assets/icon_reset.png"));
-        playerBackground = sptr<Texture>(new Texture("assets/player_background.png"));
+        selection = sptr<Texture>(new Texture("assets/selection.png"));
         backFaces[PlayerColor::BLUE] = sptr<Texture>(new Texture("assets/piece_back_blue.png"));
         backFaces[PlayerColor::RED] = sptr<Texture>(new Texture("assets/piece_back_red.png"));
         for (int i = 0; i < 12; ++i) {
