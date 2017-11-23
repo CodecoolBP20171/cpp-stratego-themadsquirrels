@@ -68,10 +68,10 @@ namespace stratego {
                         }
                         if (clickType == ClickActionType::NEXT) {
                             gameState = GameState::PLAYER_TURN;
-                            break;
+                            board->flipFaceUpForPlayer(currentPlayer);
                         }
                         if (gameState == GameState::PLAYER_TURN) {
-                            //lastAction.execute();
+                            lastAction.execute(board);
                             checkForWin();
                             board->flipFaceUpForPlayer(currentPlayer);
                         }
@@ -142,13 +142,17 @@ namespace stratego {
         currentPlayer = player1;
         currentPlayer->activate();
         player2->deactivate();
+        placePieces(player1);
         playerSetup();
         if (gameState == GameState::EXIT || gameState == GameState::RESET) return;
         board->flipFaceDown();
         switchPlayer();
         gameState = GameState::PLAYER_SETUP;
+        placePieces(player2);
         playerSetup();
+        if (gameState == GameState::EXIT || gameState == GameState::RESET) return;
         switchPlayer();
+        board->flipFaceDown();
         gameState = GameState::SWITCHING;
     }
 
@@ -202,7 +206,6 @@ namespace stratego {
             }
             case ClickActionType::BOARD:
             case ClickActionType::CONTAINER: {
-                // no first selection
                 coord pos;
                 sptr<Piece> piece;
                 sptr<DisplayMatrix> matrix;
@@ -250,31 +253,28 @@ namespace stratego {
             case ClickActionType::NEXT: {
                 gameState = GameState::PLAYER_TURN;
                 board->flipFaceUpForPlayer(currentPlayer);
+                return;
             }
             case ClickActionType::BOARD: {
-                // piece belongs to me
-                if (true) {
-                    // not flag or bomb
-                    if (true) {
-                        //save selection
+                sptr<DisplayMatrix> matrix(board);
+                sptr<Piece> piece(matrix->getPiece(matrix->getGridCoordFromMousePosition(mouse)));
+                coord pos(matrix->getGridCoordFromMousePosition(piece->getPosition()));
+                if (piece->getPlayer() == currentPlayer) {
+                    auto type(piece->getType());
+                    if (type != PieceType::FLAG && type != PieceType::BOMB) {
+                        selection1->activate(pos, matrix, piece);
                     }
-                    gameState = GameState::PLAYER_TURN;
                 } else {
-                    // have first selection
-                    if (true) {
-                        // not water
-                        if (true) {
-                            // set second selection
-                            if (board.get()->isValidMove(selection1, selection2)) {
+                    if (selection1->isActive()) {
+                        if (piece->getType() != PieceType::WATER) {
+                            selection2->activate(pos, matrix, piece);
+                            if (board->isValidMove(selection1, selection2)) {
                                 gameState = GameState::SWITCHING;
+                                return;
                             } else {
-                                // deactivate second selection
-                                gameState = GameState::PLAYER_TURN;
+                                selection2->deactivate();
                             }
-                        } else {
-                            gameState = GameState::PLAYER_TURN;
                         }
-                    } else {
                         gameState = GameState::PLAYER_TURN;
                     }
                 }
@@ -301,5 +301,20 @@ namespace stratego {
             currentPlayer = player1;
         }
         currentPlayer->activate();
+    }
+
+    void Game::placePieces(sptr<Player>& player) {
+        sptr<DisplayMatrix> cont(player->getPieceContainer());
+        sptr<DisplayMatrix> bm(board);
+        int x = 0;
+        int istart = player == player1 ? 6 : 0;
+        for (int i = istart; i < istart + 4; ++i) {
+            for (int j = 0; j < 10; ++j) {
+                auto piece(cont->getPiece(cont->linearToGridCoord(x++)));
+                selection1->activate(cont->getGridCoordFromMousePosition(piece->getPosition()), cont, piece);
+                selection2->activate({j, i}, bm, bm->getPiece({j, i}));
+                selection1->switchWith(selection2);
+            }
+        }
     }
 }

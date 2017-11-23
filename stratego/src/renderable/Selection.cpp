@@ -49,4 +49,8 @@ namespace stratego {
         deactivate();
         other->deactivate();
     }
+
+    sptr<Piece>& Selection::getPiece() {
+        return selectedPiece;
+    }
 }

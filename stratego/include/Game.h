@@ -48,6 +48,7 @@ namespace stratego {
         void waitForInput();
         ClickActionType determineClickType();
         void switchPlayer();
+        void placePieces(sptr<Player>& player);
     };
 }
 

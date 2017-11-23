@@ -18,6 +18,7 @@ namespace stratego {
         bool isActive() const;
         void faceUp();
         void switchWith(sptr<Selection>& other);
+        sptr<Piece>& getPiece();
     private:
         int x, y;
         bool active;

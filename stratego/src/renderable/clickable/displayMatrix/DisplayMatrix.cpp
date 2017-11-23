@@ -26,6 +26,8 @@ namespace stratego {
 
     sptr<Piece> DisplayMatrix::removePiece(coord from) {
         auto tmp = std::move(pieces[gridCoordToLinear(from)]);
+        pieces[gridCoordToLinear(from)] = sptr<Piece>(new Piece(PieceType::EMPTY));
+        pieces[gridCoordToLinear(from)]->setPosition(rect.x + from.x * pieceSize, rect.y + from.y * pieceSize);
         return tmp;
     }
 
