@@ -21,9 +21,11 @@ int main(int argc, char* argv[]) {
                 if (input != "yes") {
                     quit = true;
                 }
+                game = Game();
                 break;
             }
             case GameState::RESET: {
+                game = Game();
                 break;
             }
             case GameState::EXIT: {

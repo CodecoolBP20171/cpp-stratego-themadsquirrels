@@ -107,6 +107,9 @@ namespace stratego {
                 case GameState::SWITCHING: {
                     if (currentPlayer->getPieceContainer()->empty()) {
                         return;
+                    } else {
+                        placePieces(currentPlayer);
+                        return;
                     }
                     gameState = GameState::PLAYER_SETUP;
                     break;
@@ -142,13 +145,11 @@ namespace stratego {
         currentPlayer = player1;
         currentPlayer->activate();
         player2->deactivate();
-        placePieces(player1);
         playerSetup();
         if (gameState == GameState::EXIT || gameState == GameState::RESET) return;
         board->flipFaceDown();
         switchPlayer();
         gameState = GameState::PLAYER_SETUP;
-        placePieces(player2);
         playerSetup();
         if (gameState == GameState::EXIT || gameState == GameState::RESET) return;
         switchPlayer();
