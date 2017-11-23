@@ -137,4 +137,12 @@ namespace stratego {
         // Update the screen - last line
         SDL_RenderPresent(Resources::getInstance()->getRenderer());
     }
+
+    void Game::handleSetupClick() {
+
+    }
+
+    void Game::handleTurnClick() {
+
+    }
 }

@@ -8,7 +8,9 @@
 namespace stratego {
     enum class ClickActionType {
         MENU_ACTION,
-        MATRIX_ACTION
+        BOARD_ACTION,
+        CONTAINER_ACTION,
+        OUTSIDE
     };
 }
 
